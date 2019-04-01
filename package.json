@@ -1,0 +1,25 @@
+{
+    "name": "scilla",
+    "displayName": "scilla",
+    "description": " Smart Contract Intermediate Level Language",
+    "version": "0.0.1",
+    "engines": {
+        "vscode": "^1.32.0"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "contributes": {
+        "languages": [{
+            "id": "scilla",
+            "aliases": ["scilla", "scilla"],
+            "extensions": [".scilla"],
+            "configuration": "./language-configuration.json"
+        }],
+        "grammars": [{
+            "language": "scilla",
+            "scopeName": "source.scilla",
+            "path": "./syntaxes/scilla.tmLanguage.json"
+        }]
+    }
+}
