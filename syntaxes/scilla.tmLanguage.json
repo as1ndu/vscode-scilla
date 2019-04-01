@@ -13,7 +13,7 @@
 		"keywords": {
 			"patterns": [{
 				"name": "keyword.control.scilla",
-				"match": "\\b(if|while|for|return)\\b"
+				"match": "\\b(BLOCKNUMBER|BNum|BoolUtils|ByStr20|ByStr32|Cons|Emp|False|Int128|Int32|Int64|IntUtils|List|ListUtils|Map|Message|NatUtils|Nil|None|Option|Pair|PairUtils|Some|String|To_list|True|Uint128|Uint256|Uint32|Uint64|_|_tag|accept|add|badd|blt|builtin|concat|contains|contract|dist|end|eq|event|false|field|fun|get|import|in|let|library|lt|match|mul|put|remove|send|sha256hash|sub|substr|tfun|transition|true|with)\\b"
 			}]
 		},
 		"strings": {
