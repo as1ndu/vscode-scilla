@@ -1,6 +1,4 @@
-{
-	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
-	"name": "scilla",
+{	"name": "scilla",
 	"patterns": [
 		{
 			"include": "#keywords"
@@ -12,17 +10,17 @@
 	"repository": {
 		"keywords": {
 			"patterns": [{
-				"name": "keyword.control.scilla",
+				"name": "keyword.control",
 				"match": "\\b(BLOCKNUMBER|BNum|BoolUtils|ByStr20|ByStr32|Cons|Emp|False|Int128|Int32|Int64|IntUtils|List|ListUtils|Map|Message|NatUtils|Nil|None|Option|Pair|PairUtils|Some|String|To_list|True|Uint128|Uint256|Uint32|Uint64|_|_tag|accept|add|badd|blt|builtin|concat|contains|contract|dist|end|eq|event|false|field|fun|get|import|in|let|library|lt|match|mul|put|remove|send|sha256hash|sub|substr|tfun|transition|true|with)\\b"
 			}]
 		},
 		"strings": {
-			"name": "string.quoted.double.scilla",
+			"name": "string.quoted.double",
 			"begin": "\"",
 			"end": "\"",
 			"patterns": [
 				{
-					"name": "constant.character.escape.scilla",
+					"name": "constant.character.escape",
 					"match": "\\\\."
 				}
 			]

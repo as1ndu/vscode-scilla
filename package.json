@@ -1,5 +1,4 @@
-{
-    "name": "scilla",
+{   "name": "scilla",
     "displayName": "scilla",
     "description": " Smart Contract Intermediate Level Language",
     "version": "0.0.1",
