@@ -1,6 +1,7 @@
 # Todo List
 
 - [ ] Syntax Coloring
+- [ ] Icons
 - [ ] Auto-Completion
 - [ ] Formatting
 - [ ] Hover Information
