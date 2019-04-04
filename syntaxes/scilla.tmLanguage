@@ -1,0 +1,63 @@
+<?xml  version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN"   "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0" >
+<!-- Generated via Iro -->
+<dict>
+  <key>fileTypes</key>
+  <array> 
+    <string>scilla</string>
+   </array>
+  <key>name</key>
+  <string>scilla</string>
+  <key>patterns</key>
+  <array> 
+    <dict>
+      <key>include</key>
+      <string>#main</string>
+    </dict>
+   </array>
+  <key>scopeName</key>
+  <string>source.scilla</string>
+  <key>uuid</key>
+  <string></string>
+  <key>repository</key>
+  <dict>
+    <key>main</key>
+    <dict>
+      <key>patterns</key>
+      <array> 
+        <dict>
+          <key>match</key>
+          <string>\b(let|library|import|contract|event|field|send|fun|transition|match|end|with|builtin)\b</string>
+          <key>name</key>
+          <string>text.scilla</string>
+        </dict>
+        <dict>
+          <key>match</key>
+          <string>^(\(\*.+)\\*\)$</string>
+          <key>name</key>
+          <string>text.scilla</string>
+        </dict>
+        <dict>
+          <key>match</key>
+          <string>(\&quot;|\=|\:|\;|\{|\}|\[|\]|\&gt;|\&lt;|\(|\)|\||\-|\&apos;)</string>
+          <key>name</key>
+          <string>text.scilla</string>
+        </dict>
+        <dict>
+          <key>match</key>
+          <string>\b(String|Uint32|Uint64|Uint128|Uint256|Int32|Int64|Int128|Int256|Map|True|False|ByStr20|ByStr32|BNum|Option|None|Bool|Some|List|Cons|Pair|type|scilla_version|Zero|Succ)\b</string>
+          <key>name</key>
+          <string>text.scilla</string>
+        </dict>
+        <dict>
+          <key>match</key>
+          <string>\b(eq|add|sub|mul|div|rem|lt|blt|in)\b</string>
+          <key>name</key>
+          <string>text.scilla</string>
+        </dict>
+       </array>
+    </dict>
+  </dict>
+</dict>
+</plist>
