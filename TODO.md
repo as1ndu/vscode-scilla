@@ -7,4 +7,5 @@
 - [ ] Hover Information
 - [ ] Code Snippets
 - [ ] Error Checking
-- [ ] Contract Execution
+- [ ] Contract Execution 
+- [ ] Contract deployment
