@@ -1,30 +1,38 @@
 {	"name": "scilla",
 	"patterns": [
-		{
-			"include": "#keywords"
-		},
-		{
-			"include": "#strings"
-		}
-	],
+        {"include": "#main"}
+    ],
 	"repository": {
-		"keywords": {
-			"patterns": [{
-				"name": "keyword.control",
-				"match": "\\b(BLOCKNUMBER|BNum|BoolUtils|ByStr20|ByStr32|Cons|Emp|False|Int128|Int32|Int64|IntUtils|List|ListUtils|Map|Message|NatUtils|Nil|None|Option|Pair|PairUtils|Some|String|To_list|True|Uint128|Uint256|Uint32|Uint64|_|_tag|accept|add|badd|blt|builtin|concat|contains|contract|dist|end|eq|event|false|field|fun|get|import|in|let|library|lt|match|mul|put|remove|send|sha256hash|sub|substr|tfun|transition|true|with)\\b"
-			}]
-		},
-		"strings": {
-			"name": "string.quoted.double",
-			"begin": "\"",
-			"end": "\"",
-			"patterns": [
-				{
-					"name": "constant.character.escape",
-					"match": "\\\\."
-				}
-			]
-		}
+        "main": {
+            "patterns":[
+                {
+                    "match": "\\b(let|library|import|contract|event|field|send|fun|transition|match|end|with|builtin)\\b",
+                    "name" : "keyword.control.scilla"
+                },
+                {
+                    "match": "^(\\(\\*.+)\\\\*\\)$",
+                    "name" : "comment.block.documentation.scilla"
+                },
+                {
+                    "match": "\\b(String|Uint32|Uint64|Uint128|Uint256|Int32|Int64|Int128|Int256|Map|True|False|ByStr20|ByStr32|BNum|Option|None|Bool|Some|List|Cons|Pair|type|scilla_version|Zero|Succ)\\b",
+                    "name" : "storage.type.scilla"
+                },
+                {
+                    "match": "\\b(eq|add|sub|mul|div|rem|lt|blt|in)\\b",
+                    "name" : "keyword.operator.scilla"
+                },
+                {
+                    "match": "({|}|:|;|=|-|\"|<|>|\\[|\\]|\\||\\(|\\)|\\')",
+                    "name" : "punctuation.scilla"
+                },
+                {
+                    "name" : "string.quoted.double.scilla",
+                    "begin": "\"",
+                    "end": "\""
+                }
+
+            ]
+        }
 	},
 	"scopeName": "source.scilla"
 }
