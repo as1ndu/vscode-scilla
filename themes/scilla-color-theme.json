@@ -1,0 +1,54 @@
+{
+	"name": "tm",
+	"type": "dark",
+	"colors": {},
+	"tokenColors": [
+		{
+			"name": "Comment",
+			"scope": [
+				"comment.block.documentation.scilla"
+			],
+			"settings": {
+				"fontStyle": "italic",
+				"foreground": "#546E7A"
+			}
+		},
+		{
+			"name": "Keywords",
+			"scope": [
+				"keyword.control.scilla"
+			],
+			"settings": {
+				"foreground": "#FFA500"
+			}
+		},
+		{
+			"name": "Operators",
+			"scope": [
+				"keyword.operator.scilla"
+			],
+			"settings": {
+				"foreground": "#6b93e9"
+			}
+		},
+		{
+			"name": "Punctuations",
+			"scope": [
+				"punctuation.scilla"
+			],
+			"settings": {
+				"foreground": "#FFD700"
+			}
+		},
+		{
+			"name": "Types",
+			"scope": [
+				"storage.type.scilla"
+			],
+			"settings": {
+				"foreground": "#00FFFF"
+			}
+		}
+
+	]
+}
