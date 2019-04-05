@@ -18,7 +18,7 @@
                     "name" : "storage.type.scilla"
                 },
                 {
-                    "match": "\\b(eq|add|sub|mul|div|rem|lt|blt|in)\\b",
+                    "match": "\\b(eq|add|sub|mul|div|rem|lt|blt|in|scilla\\_version)\\b",
                     "name" : "keyword.operator.scilla"
                 },
                 {
