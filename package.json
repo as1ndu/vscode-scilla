@@ -1,7 +1,8 @@
 {   "name": "scilla",
     "displayName": "scilla",
-    "description": " Smart Contract Intermediate Level Language",
+    "description": "Smart Contract Intermediate Level Language",
     "version": "0.0.1",
+    "icon": "./img/logo-128x128",
     "engines": {
         "vscode": "^1.32.0"
     },
@@ -19,6 +20,17 @@
             "language": "scilla",
             "scopeName": "source.scilla",
             "path": "./syntaxes/scilla.tmLanguage.json"
+        }],
+        "themes": [{
+            "id": "scilla",
+            "label": "scilla",
+            "path": "./themes/scilla-color-theme.json",
+            "uiTheme": "vs-dark"
+        }],
+        "iconThemes": [{
+            "id": "scilla",
+            "label": "scilla",
+            "path": "./themes/scilla-icon-theme.json"
         }]
     }
 }
