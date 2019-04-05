@@ -1,13 +1,15 @@
 # Scilla for VSCode
 
-Scilla, short for Smart Contract Intermediate-Level Language, is an intermediate-level smart contract language being developed for [Zilliqa](https://zilliqa.com/). Scilla has been designed as a principled language with smart contract safety in mind.
+Scilla, short for `Smart Contract Intermediate-Level Language`, is an intermediate-level smart contract language being developed for [Zilliqa](https://zilliqa.com/). Scilla has been designed as a principled language with smart contract safety in mind.
 ‍
-Scilla imposes a structure on smart contracts that will make applications less vulnerable to attacks by eliminating certain known vulnerabilities directly at the language-level. Furthermore, the principled structure of Scilla will make applications inherently more secure and amenable to formal verification.
-‍
-The language is being developed hand-in-hand with formalization of its semantics and its embedding into the [Coq proof assistant](https://coq.inria.fr/) — a state-of-the art tool for mechanized proofs about properties of programs. 
+## To learn more about Scilla;
+- [Visit the Scilla website](https://scilla-lang.org/) for an overview.
+- Or for comprehensive guide, [read the official docs](https://scilla.readthedocs.io/en/latest/index.html).
 
 
 ## Features
+
+Features are still a work in progress, as outlined in the roadmap below;
 
 - [x] Syntax Coloring
 - [ ] Icons
@@ -21,13 +23,6 @@ The language is being developed hand-in-hand with formalization of its semantics
 
 ## Requirements
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+Latest version of [Visual Studio Code (VSCode)](https://code.visualstudio.com/)
 
-## Release Notes
-
-Users appreciate release notes as you update your extension.
-
-### 1.0.0
-
-Initial release of ...
 
