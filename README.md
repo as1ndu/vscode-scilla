@@ -12,7 +12,7 @@ Scilla, short for `Smart Contract Intermediate-Level Language`, is an intermedia
 Features are still a work in progress, as outlined in the roadmap below;
 
 - [x] Syntax Coloring
-- [ ] Icons for Scilla files
+- [X] Icons for Scilla files
 - [ ] Auto-Completion
 - [ ] Formatting
 - [ ] Hover Information
