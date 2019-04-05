@@ -1,0 +1,35 @@
+{
+	"iconDefinitions": {
+		"_file_dark": {
+			"iconPath": "./logo-128x128.png"
+		},
+		"_file_light": {
+			"iconPath": "./logo-128x128.png"
+		}
+	},
+
+	"file": "_file_dark",
+	"fileExtensions": {
+    // icons by file extension
+    "scilla": "_scilla_file"
+
+	},
+	"languageIds": {
+    // icons by language id
+    "scilla": "_scilla_file"
+	},
+	"light": {
+		"file": "_file_light",
+		"fileExtensions": {
+      // icons by file extension
+      "scilla": "_scilla_file"
+		},
+		"languageIds": {
+      // icons by language id
+      "scilla": "_scilla_file"
+		}
+	},
+	"highContrast": {
+		// overrides for high contrast
+	}
+}

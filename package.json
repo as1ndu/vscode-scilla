@@ -2,7 +2,7 @@
     "displayName": "scilla",
     "description": "Smart Contract Intermediate Level Language",
     "version": "0.0.1",
-    "icon": "./img/logo-128x128",
+    "icon": "./themes/logo-128x128",
     "engines": {
         "vscode": "^1.32.0"
     },
