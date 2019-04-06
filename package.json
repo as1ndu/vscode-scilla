@@ -1,8 +1,22 @@
 {   "name": "scilla",
     "displayName": "scilla",
     "description": "Smart Contract Intermediate Level Language",
-    "version": "0.0.1",
-    "icon": "./themes/logo-128x128",
+    "version": "0.1.0",
+    "author": {
+        "name": "as1ndu",
+        "url": "https://github.com/as1ndu/scilla"
+    },
+    "repository": {
+        "url": "https://github.com/as1ndu/scilla"
+    },
+    "icon": "themes/logo-128x128.png",
+    "publisher": "as1ndu",
+    "keywords": [
+        "scilla",
+        "blockchain",
+        "zilliqa",
+        "smart-contracts"
+    ],
     "engines": {
         "vscode": "^1.32.0"
     },
