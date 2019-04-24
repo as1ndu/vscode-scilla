@@ -18,18 +18,7 @@
     // icons by language id
     "scilla": "_scilla_file"
 	},
-	"light": {
-		"file": "_file_light",
-		"fileExtensions": {
-      // icons by file extension
-      "scilla": "_scilla_file"
-		},
-		"languageIds": {
-      // icons by language id
-      "scilla": "_scilla_file"
-		}
-	},
-	"highContrast": {
-		// overrides for high contrast
-	}
+
+	"light": {},
+	"highContrast": {}
 }
