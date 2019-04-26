@@ -27,7 +27,7 @@
         "languages": [{
             "id": "scilla",
             "aliases": ["scilla", "scilla"],
-            "extensions": [".scilla"],
+            "extensions": [".scilla",".scillib"],
             "configuration": "./language-configuration.json"
         }],
         "grammars": [{
