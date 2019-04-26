@@ -21,6 +21,7 @@ Features are still a work in progress, as outlined in the roadmap below;
 - [ ] Formatting
 - [ ] Hover Information
 - [ ] Code Snippets
+- [ ] Support for interpreter interface
 - [ ] Error Checking
 - [ ] Contract Execution 
 - [ ] Formal verification
