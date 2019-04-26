@@ -10,7 +10,7 @@
                     "name" : "keyword.control.scilla"
                 },
                 {
-                    "match": "^(\\(\\*.+)\\\\*\\)$",
+                    "match": "(^(\\s+\\(\\*.+)\\\\*\\)$|^(\\(\\*.+)\\\\*\\)$)",
                     "name" : "comment.block.documentation.scilla"
                 },
                 {
