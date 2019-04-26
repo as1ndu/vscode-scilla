@@ -10,6 +10,9 @@
         "url": "https://github.com/as1ndu/scilla"
     },
     "icon": "themes/logo-128x128.png",
+    "galleryBanner": {
+        "color": "#23a5a8"
+      },
     "publisher": "as1ndu",
     "keywords": [
         "scilla",
