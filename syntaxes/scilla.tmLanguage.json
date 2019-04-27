@@ -14,7 +14,7 @@
                     "name" : "comment.block.documentation.scilla"
                 },
                 {
-                    "match": "\\b(String|Uint32|Uint64|Uint128|Uint256|Int32|Int64|Int128|Int256|Map|True|False|ByStr20|ByStr32|ByStr33|BNum|Option|None|Bool|Some|List|Cons|Pair|type|scilla_version|Zero|Succ)\\b",
+                    "match": "\\b(String|Uint32|Uint64|Uint128|Uint256|Int32|Int64|Int128|Int256|Map|True|False|ByStr20|ByStr32|ByStr64|ByStr33|BNum|Option|None|Bool|Some|List|Cons|Pair|type|scilla_version|Zero|Succ)\\b",
                     "name" : "storage.type.scilla"
                 },
                 {
