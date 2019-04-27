@@ -1,7 +1,8 @@
-{   "name": "scilla",
+{
+    "name": "scilla",
     "displayName": "scilla",
     "description": "Smart Contract Intermediate Level Language",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "author": {
         "name": "as1ndu",
         "url": "https://github.com/as1ndu/scilla"
@@ -12,7 +13,7 @@
     "icon": "themes/logo-128x128.png",
     "galleryBanner": {
         "color": "#23a5a8"
-      },
+    },
     "publisher": "as1ndu",
     "keywords": [
         "scilla",
@@ -27,27 +28,41 @@
         "Programming Languages"
     ],
     "contributes": {
-        "languages": [{
-            "id": "scilla",
-            "aliases": ["scilla", "scilla"],
-            "extensions": [".scilla",".scillib"],
-            "configuration": "./language-configuration.json"
-        }],
-        "grammars": [{
-            "language": "scilla",
-            "scopeName": "source.scilla",
-            "path": "./syntaxes/scilla.tmLanguage.json"
-        }],
-        "themes": [{
-            "id": "scilla",
-            "label": "scilla",
-            "path": "./themes/scilla-color-theme.json",
-            "uiTheme": "vs-dark"
-        }],
-        "iconThemes": [{
-            "id": "scilla",
-            "label": "scilla",
-            "path": "./themes/scilla-icon-theme.json"
-        }]
+        "languages": [
+            {
+                "id": "scilla",
+                "aliases": [
+                    "scilla",
+                    "scilla"
+                ],
+                "extensions": [
+                    ".scilla",
+                    ".scillib"
+                ],
+                "configuration": "./language-configuration.json"
+            }
+        ],
+        "grammars": [
+            {
+                "language": "scilla",
+                "scopeName": "source.scilla",
+                "path": "./syntaxes/scilla.tmLanguage.json"
+            }
+        ],
+        "themes": [
+            {
+                "id": "scilla",
+                "label": "scilla",
+                "path": "./themes/scilla-color-theme.json",
+                "uiTheme": "vs-dark"
+            }
+        ],
+        "iconThemes": [
+            {
+                "id": "scilla",
+                "label": "scilla",
+                "path": "./themes/scilla-icon-theme.json"
+            }
+        ]
     }
 }
