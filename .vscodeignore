@@ -1,3 +1,7 @@
 .vscode/**
 .vscode-test/**
 .gitignore
+**/*.ts
+**/tsconfig.json
+!file.ts
+at.txt
