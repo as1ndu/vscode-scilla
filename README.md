@@ -21,8 +21,9 @@ Features are still a work in progress, as outlined in the roadmap below;
 - [ ] Formatting
 - [ ] Hover Information
 - [ ] Code Snippets
+- [ ] Linter
 - [ ] Support for interpreter interface
-- [ ] Error Checking
+- [ ] Scilla Checker
 
 
 ## Requirements
