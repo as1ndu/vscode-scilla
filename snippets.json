@@ -1,0 +1,46 @@
+{
+    "transition": {
+        "prefix": "transition",
+        "body": [
+            "transition transitionName(param_1: type_1)\n(* statements go below *)\n\t$1\nend",
+            "$2"
+        ],
+        "description": "create a transition"
+    },
+
+    "fun": {
+        "prefix": "fun",
+        "body": [
+            "fun (input_1 : type_1) => \n\t(* expression goes here *)\n\t$1",
+            "$2"
+        ],
+        "description": "create a function"
+    },
+
+    "match": {
+        "prefix": "match",
+        "body": [
+            "match param_1 with\n\t| True =>\n\t(*statements for true*)\n\t$1\n\t| False =>\n \t(*statements for False*)\n end",
+            "$2"
+        ],
+        "description": "create a pattern match"
+    },
+
+    "field": {
+        "prefix": "field",
+        "body": [
+            "field variable_1 : type_1 = '$1' ",
+            "$2"
+        ],
+        "description": "create field (mutable variable)"
+    },
+
+    "scilla": {
+        "prefix": "scilla",
+        "body": ["(* Scilla contract structure *)\n\n(***************************************************)\n(*                 Scilla version                  *)\n(***************************************************)\n\nscilla_version 1\n\n(***************************************************)\n(*               Associated library                *)\n(***************************************************)\n\nlibrary MyContractLib\n\n\n(* Library code block follows *)\n\n\n\n(***************************************************)\n(*             Contract definition                 *)\n(***************************************************)\n\ncontract MyContract\n\n(* Immutable fields declaration *)\n\n(vname_1 : vtype_1,\n vname_2 : vtype_2)\n\n(* Mutable fields declaration *)\n\nfield vname_1 : vtype_1 = init_val_1\nfield vname_2 : vtype_2 = init_val_2\n\n(* Transitions *)\n\n\n(* Transition signature *)\ntransition firstTransition (param_1 : type_1, param_2 : type_2)\n  (* Transition body *)\n\nend\n\ntransition secondTransition (param_1: type_1)\n  (* Transition body *)\n\nend","$2"],
+        
+        "description": "create a new scilla contract"
+    }
+
+
+}
