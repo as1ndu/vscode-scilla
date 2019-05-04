@@ -25,7 +25,8 @@
         "vscode": "^1.32.0"
     },
     "categories": [
-        "Programming Languages"
+        "Programming Languages",
+        "Snippets"
     ],
     "contributes": {
         "languages": [
@@ -62,6 +63,12 @@
                 "id": "scilla",
                 "label": "scilla",
                 "path": "./themes/scilla-icon-theme.json"
+            }
+        ],
+        "snippets": [
+            {
+                "language": "scilla",
+                "path": "./snippets.json"
             }
         ]
     }
