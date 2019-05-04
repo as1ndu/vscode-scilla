@@ -19,9 +19,9 @@ Features are still a work in progress, as outlined in the roadmap below;
 - [X] Icons for Scilla files
 - [X] Code folding
 - [ ] Auto-Completion
+- [x] Code Snippets
 - [ ] Formatting
 - [ ] Hover Information
-- [ ] Code Snippets
 - [ ] Linter
 - [ ] Support for interpreter interface
 - [ ] Scilla Checker
