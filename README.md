@@ -17,6 +17,7 @@ Features are still a work in progress, as outlined in the roadmap below;
 
 - [x] Syntax Coloring
 - [X] Icons for Scilla files
+- [X] Code folding
 - [ ] Auto-Completion
 - [ ] Formatting
 - [ ] Hover Information
