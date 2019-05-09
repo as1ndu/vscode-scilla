@@ -29,8 +29,21 @@
         "Snippets"
     ],
     "activationEvents": [
-        "onLanguage:scilla"
+        "*"
     ],
+    "main": "./out/extension.js",
+    "scripts": {
+        "vscode:prepublish": "npm run compile",
+        "compile": "tsc -p ./",
+        "watch": "tsc -watch -p ./",
+        "postinstall": "node ./node_modules/vscode/bin/install"
+    },
+    "devDependencies": {
+		"@types/node": "^10.12.18",
+		"tslint": "^5.11.1",
+		"typescript": "^3.2.4",
+		"vscode": "^1.1.27"
+	},
     "contributes": {
         "languages": [
             {
