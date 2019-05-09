@@ -28,6 +28,9 @@
         "Programming Languages",
         "Snippets"
     ],
+    "activationEvents": [
+        "onLanguage:scilla"
+    ],
     "contributes": {
         "languages": [
             {
