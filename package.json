@@ -5,7 +5,7 @@
 
     "description": "Smart Contract Intermediate Level Language",
 
-    "version": "0.5.0",
+    "version": "0.5.2",
 
     "author": {
         "name": "as1ndu",
@@ -66,14 +66,6 @@
                 "language": "scilla",
                 "scopeName": "source.scilla",
                 "path": "./syntaxes/scilla.tmLanguage.json"
-            }
-        ],
-        "themes": [
-            {
-                "id": "scilla",
-                "label": "scilla",
-                "path": "./themes/scilla-color-theme.json",
-                "uiTheme": "vs-dark"
             }
         ],
         "iconThemes": [

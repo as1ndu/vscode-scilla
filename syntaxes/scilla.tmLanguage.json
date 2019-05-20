@@ -22,10 +22,6 @@
                     "name" : "keyword.operator.scilla"
                 },
                 {
-                    "match": "(@|{|}|:|;|=|-|\"|<|>|\\[|\\]|\\||\\(|\\)|\\')",
-                    "name" : "punctuation.scilla"
-                },
-                {
                     "name" : "string.quoted.double.scilla",
                     "begin": "\"",
                     "end": "\""
