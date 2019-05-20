@@ -19,7 +19,7 @@
                 },
                 {
                     "match": "\\b(eq|add|sub|mul|div|rem|lt|blt|in|scilla\\_version|substr|sha256hash|keccak256hash|ripemd160hash|to\\_byStr|to\\_nat|pow|to\\_uint256|to\\_uint32|to\\_uint64|to\\_uint128|to\\_int256|to\\_int32|to\\_int64|to\\_list|to\\_int128|schnorr\\_verify|concat|andb|orb|bool_to_string|negb)\\b",
-                    "name" : "keyword.operator.scilla"
+                    "name" : "variable"
                 },
                 {
                     "name" : "string.quoted.double.scilla",
