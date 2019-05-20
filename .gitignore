@@ -2,3 +2,4 @@ token.txt
 node_modules
 out
 .vscode/settings.json
+.vscode/ipch

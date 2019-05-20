@@ -1,10 +1,11 @@
 /*---------------------------------------------------------
- * Copyright (C) Microsoft Corporation. All rights reserved.
+ * Copyright (C) 2019 Asindu Willfred Drileba. All rights reserved.
  *--------------------------------------------------------*/
 
 'use strict';
 
 import * as vscode from 'vscode';
+// import { formatWithOptions } from 'util';
 
 export function activate(context: vscode.ExtensionContext) {
 
@@ -37,19 +38,19 @@ export function activate(context: vscode.ExtensionContext) {
 				//storage
 				String: '`String`: literals in Scilla are expressed using a sequence of characters enclosed in double quotes. Variables can be declared by specifying using keyword `String`',
 				Uint32: '`Uint32`: 32 bit integer type',
-				Uint64: '`Uint32`: 32 bit integer type',
-				Uint128: '`Uint32`: 32 bit integer type',
-				Uint256: '`Uint32`: 32 bit integer type',
+				Uint64: '`Uint64`: 64 bit integer type',
+				Uint128: '`Uint128`: 128 bit integer type',
+				Uint256: '`Uint256`: 256 bit integer type',
 				Int32: '`Int32`: 32 bit integer type',
-				Int64: '`Int64`: 32 bit integer type',
-				Int128: '`Int128`: 32 bit integer type',
-				Int256: '`Int256`: 32 bit integer type',
+				Int64: '`Int64`: 64 bit integer type',
+				Int128: '`Int128`: 128 bit integer type',
+				Int256: '`Int256`: 256 bit integer type',
 				Map: '`Map`: A value of type `Map kt vt` provides a key-value store where `kt` is the type of keys and `vt` is the type of values.',
 				True: '`True`: Value of Boolean type',
 				False: '`False`: Value of Boolean type',
 				ByStr20: '`ByStr20`: Used to declare addreses. Represents a hexadecimal byte string of 20 bytes (40 hexadecimal characters). A `ByStr20` literal is prefixed with `0x`',
 				ByStr32: '`ByStr32`: A hash in Scilla is declared using the data type `ByStr32`. A `ByStr32` represents a hexadecimal byte string of 32 bytes (64 hexadecimal characters). A `ByStr32` literal is prefixed with `0x`',
-				ByStr64: '`ByStr64`: Used to declar digital signtures.',
+				ByStr64: '`ByStr64`: Used to declare digital signtures.',
 				ByStr33: '`ByStr33`: Used to declare Schnorr public key',
 				BNum: '`BNum`: Block numbers have a dedicated type `BNum` in Scilla. Variables of this type are specified with the keyword `BNum` followed by an integer value (for example `BNum 101`)',
 				Option: '`Optional`: Optional values are specified using the type `Option t`	, where `t` is some type. The `Option` ADT has two constructors:	Some represents the presence of a value. The `Some` constructor takes one argument (the `value`, of type `t`). `None` represents the absence of a value. The `None` constructor takes no arguments.',
@@ -73,7 +74,7 @@ export function activate(context: vscode.ExtensionContext) {
 				rem: '_rem_: `builtin rem i1 i2`: The remainder of integer division of `i1` by `i2`. Returns an integer of the same type.',
 				lt: '_lt_: `builtin lt i1 i2` Is `i1` less than `i2`? Returns a `Bool`',
 				blt: '_blt_: `blt b1 b2`, Is `b1` less than `b2`? Returns a `Bool`',
-				in: '_in_: Used after thw `let` keyword',
+				in: '_in_: Used after the `let` keyword',
 				substr: '_substr_: `builtin substr s1 i1 i2`, Extract the substring of `s1` of length `i2` starting from position `i1` with length. `i1` and `i2` must be of type `Uint32`. Character indices in strings start from `0`. Returns a `String`',
 				sha256hash: '_sha256hash_: `builtin sha256hash x`, Convert `x` of Any type to its SHA256 hash. Returns a `ByStr32`',
 				keccak256hash: '_keccak256hash_: `builtin keccak256hash x`, Convert `x` of Any type to its Keccak256 hash. Returns a `ByStr32`',
@@ -90,17 +91,18 @@ export function activate(context: vscode.ExtensionContext) {
 				to_int64: '_to_int64_: `builtin to_int64 x`, Convert a hash x to the equivalent value of type `Int64`. x must be of type ByStrX for some known X less than or equal to 64',
 				to_list: '_to_list_: Equality operator `builtin eq i1 i2` Is i1 equal to i2? Returns a Bool',
 				to_int128: '_to_int128_: `builtin to_int64 x`, Convert a hash x to the equivalent value of type `Int128`. x must be of type ByStrX for some known X less than or equal to 128',
-				schnorr_verify: '_schnorr_verify_: `builtin schnorr_verify pubk x sig` Verify a signature sig of type `ByStr64` against a hash `x` of type `ByStr32` with the Schnorr public key pubk of type `ByStr33`',
-				concat: '_concat_: `concat x1 x2` Concatenate the hashes `x1` and `x2`. If x1 has type ByStrX and x2 has type ByStrY, then the result will have type `ByStr(X+Y)`',				};
+				schnorr_verify: '_schnorr\_verify_: `builtin schnorr_verify pubk x sig` Verify a signature sig of type `ByStr64` against a hash `x` of type `ByStr32` with the Schnorr public key pubk of type `ByStr33`',
+				concat: '_concat_: `concat x1 x2` Concatenate the hashes `x1` and `x2`. If x1 has type ByStrX and x2 has type ByStrY, then the result will have type `ByStr(X+Y)`',
+			};
 			return new vscode.Hover(map[word]);
 		}
 
 	});
 
-
+	// Auto complete feature
 	let autocompleteFeature = vscode.languages.registerCompletionItemProvider('scilla', {
 
-		provideCompletionItems(document, position, token, context) {
+		provideCompletionItems() {
 
 			let completionWords = new Array;
 
@@ -127,12 +129,12 @@ export function activate(context: vscode.ExtensionContext) {
 			const stringCompletion = new vscode.CompletionItem('String');
 			const uint32Completion = new vscode.CompletionItem('Uint32');
 			const uint64Completion = new vscode.CompletionItem('Uint64');
-			const uint128Completion = new vscode.CompletionItem('Uint64');
-			const uint256Completion = new vscode.CompletionItem('Uint64');
+			const uint128Completion = new vscode.CompletionItem('Uint128');
+			const uint256Completion = new vscode.CompletionItem('Uint256');
 			const int32Completion = new vscode.CompletionItem('Int32');
 			const int64Completion = new vscode.CompletionItem('Int64');
-			const int128Completion = new vscode.CompletionItem('Int64');
-			const int256Completion = new vscode.CompletionItem('Int64');
+			const int128Completion = new vscode.CompletionItem('Int128');
+			const int256Completion = new vscode.CompletionItem('Int256');
 			const mapCompletion = new vscode.CompletionItem('Map');
 			const trueCompletion = new vscode.CompletionItem('True');
 			const falseCompletion = new vscode.CompletionItem('False');
@@ -162,7 +164,7 @@ export function activate(context: vscode.ExtensionContext) {
 			const ltCompletion = new vscode.CompletionItem('lt');
 			const bltCompletion = new vscode.CompletionItem('blt');
 			const inCompletion = new vscode.CompletionItem('in');
-			const subtrCompletion = new vscode.CompletionItem('subtr');
+			const substrCompletion = new vscode.CompletionItem('substr');
 			const shaCompletion = new vscode.CompletionItem('sha256hash');
 			const keccakCompletion = new vscode.CompletionItem('keccak256hash');
 			const ripemdCompletion = new vscode.CompletionItem('ripemd160hash');
@@ -180,10 +182,6 @@ export function activate(context: vscode.ExtensionContext) {
 			const concatCompletion = new vscode.CompletionItem('to_concat');
 			const schnorr_verify = new vscode.CompletionItem('schnorr_verify');
 			const tolistCompletion = new vscode.CompletionItem('to_list');
-
-
-
-
 
 			completionWords.push(
 				//keywords
@@ -243,7 +241,7 @@ export function activate(context: vscode.ExtensionContext) {
 				ltCompletion,
 				bltCompletion,
 				inCompletion,
-				subtrCompletion,
+				substrCompletion,
 				shaCompletion,
 				keccakCompletion,
 				ripemdCompletion,
@@ -267,6 +265,37 @@ export function activate(context: vscode.ExtensionContext) {
 			return completionWords;
 		}
 	});
+/*
+	// Document formating feature
+	let formatingFeature = vscode.languages.registerDocumentFormattingEditProvider('scilla', {
+		//loop over all lines of code
 
-	context.subscriptions.push(hoverFeature, autocompleteFeature);
+		provideDocumentFormattingEdits(document, options, token) {
+				
+
+			// new line after let declares  function
+			let loc = 0; 
+			while (loc <= document.lineCount ) {
+				const scillaLine = document.lineAt(loc);
+		
+			if (scillaLine.text == 'let') {
+				return [vscode.TextEdit.insert(scillaLine.range.start, '\n')];
+			}
+			loc++
+				
+			}
+
+			// indentation for transition
+			// indentation for function
+			// indentation for  match
+			// newline after semi colon
+			// newline after scilla contract declaration
+		}
+
+	});
+	*/
+
+
+
+	context.subscriptions.push(hoverFeature, autocompleteFeature /*, formatingFeature */);
 }
