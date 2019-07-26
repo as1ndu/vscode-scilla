@@ -265,37 +265,9 @@ export function activate(context: vscode.ExtensionContext) {
 			return completionWords;
 		}
 	});
-/*
-	// Document formating feature
-	let formatingFeature = vscode.languages.registerDocumentFormattingEditProvider('scilla', {
-		//loop over all lines of code
-
-		provideDocumentFormattingEdits(document, options, token) {
-				
-
-			// new line after let declares  function
-			let loc = 0; 
-			while (loc <= document.lineCount ) {
-				const scillaLine = document.lineAt(loc);
-		
-			if (scillaLine.text == 'let') {
-				return [vscode.TextEdit.insert(scillaLine.range.start, '\n')];
-			}
-			loc++
-				
-			}
-
-			// indentation for transition
-			// indentation for function
-			// indentation for  match
-			// newline after semi colon
-			// newline after scilla contract declaration
-		}
-
-	});
-	*/
 
 
 
-	context.subscriptions.push(hoverFeature, autocompleteFeature /*, formatingFeature */);
+
+	context.subscriptions.push(hoverFeature, autocompleteFeature);
 }

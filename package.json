@@ -1,51 +1,37 @@
 {
     "name": "scilla",
-    
     "displayName": "scilla",
-
     "description": "Smart Contract Intermediate Level Language",
-
     "version": "0.5.3",
-
     "author": {
         "name": "as1ndu",
         "url": "https://github.com/as1ndu/scilla"
     },
-
     "repository": {
         "url": "https://github.com/as1ndu/scilla"
     },
-
     "icon": "themes/logo-128x128.png",
-
     "galleryBanner": {
         "color": "#23a5a8"
     },
-
     "publisher": "as1ndu",
-
     "keywords": [
         "scilla",
         "blockchain",
         "zilliqa",
         "smart-contracts"
     ],
-
     "engines": {
         "vscode": "^1.32.0"
     },
-
     "categories": [
         "Programming Languages",
         "Snippets"
     ],
-
     "activationEvents": [
         "onLanguage:scilla"
     ],
-
     "main": "./out/extension.js",
-
     "contributes": {
         "languages": [
             {
@@ -82,18 +68,20 @@
             }
         ]
     },
-
     "scripts": {
         "vscode:prepublish": "npm run compile",
         "compile": "tsc -p ./",
         "watch": "tsc -watch -p ./",
         "postinstall": "node ./node_modules/vscode/bin/install"
     },
-
     "devDependencies": {
         "@types/node": "^10.14.6",
         "tslint": "^5.16.0",
         "typescript": "^3.4.5",
         "vscode": "^1.1.27"
+    },
+    "dependencies": {
+        "check-os": "^1.0.1",
+        "node-cmd": "^3.0.0"
     }
 }
