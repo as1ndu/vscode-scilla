@@ -24,8 +24,7 @@ Features are still a work in progress, as outlined in the roadmap below;
 - [ ] Formatting
 - [X] Hover Information
 - [ ] Linter
-- [ ] Support for interpreter interface
-- [ ] Scilla Checker
+- [ ] Cash Flow Analysis
 
 
 ## Requirements
