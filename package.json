@@ -33,6 +33,18 @@
     ],
     "main": "./out/extension.js",
     "contributes": {
+        "menus": {
+            "commandPalette": [
+              {
+                "command": "scilla.LintWithScillaChecker",
+                "when": "editorLangId == scilla"
+              }
+            ]
+          },
+        "commands":[{
+            "command": "scilla.LintWithScillaChecker",
+            "title": "Scilla Linter"
+        }],
         "languages": [
             {
                 "id": "scilla",
