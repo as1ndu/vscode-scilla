@@ -29,7 +29,7 @@ Features are still a work in progress, as outlined in the roadmap below;
 
 ## Requirements
 
-Latest version of [Visual Studio Code (VSCode)](https://code.visualstudio.com/)
+Latest version of [Visual Studio Code (VSCode)](https://code.visualstudio.com/) i.e VSCode Engine 1.32.0 & above
 
 ## Screenshot
 
