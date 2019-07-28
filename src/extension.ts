@@ -5,11 +5,13 @@
 'use strict';
 
 import * as vscode from 'vscode';
-// import { formatWithOptions } from 'util';
+import * as os from 'check-os';
+import * as cmd from 'node-cmd';
+import * as path from 'path';
 
 export function activate(context: vscode.ExtensionContext) {
 
-	// hover feature
+	// Hover feature
 	let hoverFeature = vscode.languages.registerHoverProvider('scilla', {
 		provideHover(document, position) {
 			const wordRange = document.getWordRangeAtPosition(position);
@@ -266,8 +268,117 @@ export function activate(context: vscode.ExtensionContext) {
 		}
 	});
 
+	/*
+	let linterFeature = vscode.commands.registerCommand('scilla.LintWithScillaChecker', () => {
+	})
+	*/
+
+	const collection = vscode.languages.createDiagnosticCollection('scilla');
+	if (vscode.window.activeTextEditor) {
+		updateDiagnostics(vscode.window.activeTextEditor.document, collection);
+	}
+	var linterFeature = vscode.window.onDidChangeActiveTextEditor(e => updateDiagnostics(e.document, collection));
+
+	context.subscriptions.push(hoverFeature, autocompleteFeature, linterFeature);
+}
 
 
 
-	context.subscriptions.push(hoverFeature, autocompleteFeature);
+
+function updateDiagnostics(document: vscode.TextDocument, collection: vscode.DiagnosticCollection): void {
+	if (os.isWindows) {
+
+		cmd.get(
+			`scilla`,
+			function (err, data, stderr) {
+
+				if (data) {
+					var content = JSON.parse(data);
+					var numberOfErrMessages = content.warnings.length;
+
+					var ScillaCollection = []
+
+					// Loop over all diagnostic messages
+					for (let errNumber = 0; errNumber < numberOfErrMessages; errNumber++) {
+
+						var errMessage = content.warnings[errNumber].warning_message;
+						var errLine = content.warnings[errNumber].start_location.line;
+						var errColumn = content.warnings[errNumber].start_location.column;
+						var errId = content.warnings[errNumber].warning_id;
+
+						console.log(errLine, errColumn);
+
+						var fullErrMessage = {
+							code: errId, // feed the err id from scilla checker
+							message: errMessage, // feed inn err message from scilla checker
+							range: new vscode.Range(
+								new vscode.Position(errLine, errColumn), // position where err starts
+								new vscode.Position(errLine + 1, errColumn + 1)), // position where err ends
+							severity: vscode.DiagnosticSeverity.Warning, // label these as warnings
+							source: 'Scilla Checker (linter)', // label this as err from scilla ckecker
+							relatedInformation: [
+								new vscode.DiagnosticRelatedInformation(
+									new vscode.Location(
+										document.uri,
+										new vscode.Range(
+											new vscode.Position(errLine, errColumn),
+											new vscode.Position(errLine + 1, errColumn + 1)
+										)),
+									errMessage)
+
+							]
+						}
+
+						ScillaCollection.push(fullErrMessage) // create an array of all warnings
+
+						// only create this diagnostic for scilla files
+						if (document && path.extname(document.uri.fsPath) === '.scilla') {
+							collection.set(document.uri, ScillaCollection); //send list of errs to VSCode
+
+						} else {
+							collection.clear();
+						}
+
+					}
+
+				} else {
+
+					// consuming data from syntax Error
+					let fileNameRgx = /\w*(?=\.scilla.)/g;
+					let LineRgx = /\d+/g;
+					let errTypeRgx = /\w+/g;
+
+					let standardErr = {
+						"filename": fileNameRgx.exec(stderr)[0] + ".scilla",
+						"errline": stderr.match(LineRgx)[0],
+						"errcolumn": stderr.match(LineRgx)[1],
+						"errtype": stderr.match(errTypeRgx)[5] + " Error"
+					}
+
+					if (document && path.extname(document.uri.fsPath) === '.scilla') {
+						collection.set(document.uri, [{
+							code: '0',
+							message: standardErr.errtype,
+							range: new vscode.Range(new vscode.Position(standardErr.errline, standardErr.errcolumn), new vscode.Position(standardErr.errline+1, standardErr.errcolumn+1)),
+							severity: vscode.DiagnosticSeverity.Error,
+							source: 'Scilla Checker (linter)',
+							relatedInformation: []
+						}]);
+					} else {
+						collection.clear();
+					}
+
+					vscode.window.showInformationMessage(standardErr.errtype);
+				}
+
+			}
+		);
+
+	} else {
+		vscode.window.showInformationMessage('Install WSL to enable  linting & cashflow analysis');
+	}
+}
+
+// this method is called when your extension is deactivated
+export function deactivate() {
 }
