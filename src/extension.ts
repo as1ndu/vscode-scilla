@@ -286,11 +286,14 @@ export function activate(context: vscode.ExtensionContext) {
 
 
 function updateDiagnostics(document: vscode.TextDocument, collection: vscode.DiagnosticCollection): void {
-	if (os.isWindows) {
+	if (!os.isWindows) {
 
 		cmd.get(
+			// `scilla-checker -libdir SCILLA_STDLIB_PATH  ${path.basename(document.uri.fsPath)} -jsonerrors`,
 			`scilla`,
 			function (err, data, stderr) {
+
+				//console.log(path.basename(document.uri.fsPath));
 
 				if (data) {
 					var content = JSON.parse(data);
@@ -305,8 +308,6 @@ function updateDiagnostics(document: vscode.TextDocument, collection: vscode.Dia
 						var errLine = content.warnings[errNumber].start_location.line;
 						var errColumn = content.warnings[errNumber].start_location.column;
 						var errId = content.warnings[errNumber].warning_id;
-
-						console.log(errLine, errColumn);
 
 						var fullErrMessage = {
 							code: errId, // feed the err id from scilla checker
@@ -334,41 +335,42 @@ function updateDiagnostics(document: vscode.TextDocument, collection: vscode.Dia
 						// only create this diagnostic for scilla files
 						if (document && path.extname(document.uri.fsPath) === '.scilla') {
 							collection.set(document.uri, ScillaCollection); //send list of errs to VSCode
+							//vscode.window.showInformationMessage(standardErr.errtype);
 
 						} else {
 							collection.clear();
 						}
-
 					}
 
 				} else {
 
 					// consuming data from syntax Error
-					let fileNameRgx = /\w*(?=\.scilla.)/g;
-					let LineRgx = /\d+/g;
-					let errTypeRgx = /\w+/g;
-
-					let standardErr = {
-						"filename": fileNameRgx.exec(stderr)[0] + ".scilla",
-						"errline": stderr.match(LineRgx)[0],
-						"errcolumn": stderr.match(LineRgx)[1],
-						"errtype": stderr.match(errTypeRgx)[5] + " Error"
-					}
+					var content = JSON.parse(data);
+					var errtype = content.errors[0].error_message;
+					var errline = content.errors[0].start_location.line
+					var errcolumn = content.errors[0].start_location.column
 
 					if (document && path.extname(document.uri.fsPath) === '.scilla') {
 						collection.set(document.uri, [{
 							code: '0',
-							message: standardErr.errtype,
-							range: new vscode.Range(new vscode.Position(standardErr.errline, standardErr.errcolumn), new vscode.Position(standardErr.errline+1, standardErr.errcolumn+1)),
+							message: errtype,
+							range: new vscode.Range(new vscode.Position(errline, errcolumn), new vscode.Position(errline+1, errcolumn+1)),
 							severity: vscode.DiagnosticSeverity.Error,
 							source: 'Scilla Checker (linter)',
-							relatedInformation: []
+							relatedInformation: [new vscode.DiagnosticRelatedInformation(
+								new vscode.Location(
+									document.uri,
+									new vscode.Range(
+										new vscode.Position(errline, errcolumn),
+										new vscode.Position(errline + 1, errcolumn + 1)
+									)),
+								errMessage)]
 						}]);
 					} else {
 						collection.clear();
 					}
 
-					vscode.window.showInformationMessage(standardErr.errtype);
+					vscode.window.showInformationMessage(errtype);
 				}
 
 			}
