@@ -36,14 +36,14 @@
         "menus": {
             "commandPalette": [
               {
-                "command": "scilla.LintWithScillaChecker",
+                "command": "scilla.CashFlowAnalyser",
                 "when": "editorLangId == scilla"
               }
             ]
           },
         "commands":[{
-            "command": "scilla.LintWithScillaChecker",
-            "title": "Scilla Linter"
+            "command": "scilla.CashFlowAnalyser",
+            "title": "Scilla Cash Flow Analyser"
         }],
         "languages": [
             {
