@@ -282,19 +282,16 @@ export function activate(context: vscode.ExtensionContext) {
 	context.subscriptions.push(hoverFeature, autocompleteFeature, linterFeature);
 }
 
-
-
-
 function updateDiagnostics(document: vscode.TextDocument, collection: vscode.DiagnosticCollection): void {
-	if (os.isWindows) {
+	if (!os.isWindows) {
 
 		// convert  absolute windows path to linux path
-		var absolutepath = "/mnt/" + path.dirname(document.uri.fsPath).replace(":","").replace(/\\/g,"/");
-		console.log(absolutepath);
+		var absolutepath = path.dirname(document.uri.fsPath).replace(":","").replace(/\\/g,"/") + "/"; 
+		console.log(absolutepath + path.basename(document.uri.fsPath));
 
 		cmd.get(
-			//`scilla-checker -libdir SCILLA_STDLIB_PATH  ${path.basename(document.uri.fsPath)} -jsonerrors`,
-			`scilla`,
+			`scilla-checker -libdir SCILLA_STDLIB_PATH  ${absolutepath + path.basename(document.uri.fsPath)} -jsonerrors`,
+			//`scilla`,
 			function (err, data, stderr) {
 
 				//console.log(path.basename(document.uri.fsPath));
@@ -319,8 +316,8 @@ function updateDiagnostics(document: vscode.TextDocument, collection: vscode.Dia
 							code: errId, // feed the err id from scilla checker
 							message: errMessage, // feed inn err message from scilla checker
 							range: new vscode.Range(
-								new vscode.Position(errLine, errColumn), // position where err starts
-								new vscode.Position(errLine + 1, errColumn + 1)), // position where err ends
+								new vscode.Position(errLine-1, errColumn-1), // position where err starts
+								new vscode.Position(errLine , errColumn )), // position where err ends
 							severity: vscode.DiagnosticSeverity.Warning, // label these as warnings
 							source: 'Scilla Checker (linter)', // label this as err from scilla ckecker
 							relatedInformation: [
@@ -328,8 +325,8 @@ function updateDiagnostics(document: vscode.TextDocument, collection: vscode.Dia
 									new vscode.Location(
 										document.uri,
 										new vscode.Range(
-											new vscode.Position(errLine, errColumn),
-											new vscode.Position(errLine + 1, errColumn + 1)
+											new vscode.Position(errLine-1, errColumn-1),
+											new vscode.Position(errLine , errColumn)
 										)),
 									errMessage)
 
@@ -341,7 +338,7 @@ function updateDiagnostics(document: vscode.TextDocument, collection: vscode.Dia
 						// only create this diagnostic for scilla files
 						if (document && path.extname(document.uri.fsPath) === '.scilla') {
 							collection.set(document.uri, ScillaCollection); //send list of errs to VSCode
-							//vscode.window.showInformationMessage(standardErr.errtype);
+							//vscode.window.showInformationMessage(errMessage);
 
 						} else {
 							collection.clear();
@@ -371,8 +368,8 @@ function updateDiagnostics(document: vscode.TextDocument, collection: vscode.Dia
 								new vscode.Location(
 									document.uri,
 									new vscode.Range(
-										new vscode.Position(errline, errcolumn),
-										new vscode.Position(errline + 1, errcolumn + 1)
+										new vscode.Position(errline-1, errcolumn-1),
+										new vscode.Position(errline, errcolumn)
 									)),
 								errMessage)]
 						}]);
@@ -380,7 +377,7 @@ function updateDiagnostics(document: vscode.TextDocument, collection: vscode.Dia
 						collection.clear();
 					}
 
-					vscode.window.showInformationMessage(errtype);
+					//vscode.window.showInformationMessage(errtype);
 				}
 
 			}
