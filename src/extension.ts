@@ -268,25 +268,64 @@ export function activate(context: vscode.ExtensionContext) {
 		}
 	});
 
-	/*
-	let linterFeature = vscode.commands.registerCommand('scilla.LintWithScillaChecker', () => {
-	})
-	*/
+
+	// CashFlow Analyser
+	let CashFlowAnalyser = vscode.commands.registerCommand('scilla.CashFlowAnalyser', () => {
+
+		// Create and show panel
+		const panel = vscode.window.createWebviewPanel(
+			'scilla',
+			'Cash Flow Analyser',
+			vscode.ViewColumn.One,
+			{}
+		);
+
+		if (!os.isWindows) {
+
+			var absolutepath = path.dirname(vscode.window.activeTextEditor.document.uri.fsPath).replace(":", "").replace(/\\/g, "/") + "/";
+
+			console.log('Waiting for data from scilla-checker')
+			cmd.get(`scilla-checker -cf -libdir SCILLA_STDLIB_PATH  ${absolutepath + path.basename(vscode.window.activeTextEditor.document.uri.fsPath)} -jsonerrors`,
+
+				function (err, data, stderr) {
+					if (data) {
+						console.log('Parsing data from scilla-checker');
+						var content = JSON.parse(data);
+						var CFstateVariables = content.cashflow_tags["State variables"];
+						var CFadtConstructors = content.cashflow_tags["ADT constructors"];
+
+						console.log(`Finnished Analysing: ${CFstateVariables.length} State variables  &  ${CFadtConstructors.length} ADT Constructors`);
+
+						panel.webview.html = getWebviewContent(CFstateVariables, CFadtConstructors);
+
+					}
+				});
+		}
+
+
+	});
+
 
 	const collection = vscode.languages.createDiagnosticCollection('scilla');
 	if (vscode.window.activeTextEditor) {
 		updateDiagnostics(vscode.window.activeTextEditor.document, collection);
 	}
 	var linterFeature = vscode.window.onDidChangeActiveTextEditor(e => updateDiagnostics(e.document, collection));
+	var linterFeature2 = vscode.workspace.onDidChangeTextDocument(e => updateDiagnostics(e.document, collection));
 
-	context.subscriptions.push(hoverFeature, autocompleteFeature, linterFeature);
+	context.subscriptions.push(hoverFeature, autocompleteFeature, linterFeature, linterFeature2, CashFlowAnalyser);
 }
 
 function updateDiagnostics(document: vscode.TextDocument, collection: vscode.DiagnosticCollection): void {
+
+
+	// restrict scilla checker to Linux & MacOS
 	if (!os.isWindows) {
 
+		collection.clear(); //show one err at a time
+
 		// convert  absolute windows path to linux path
-		var absolutepath = path.dirname(document.uri.fsPath).replace(":","").replace(/\\/g,"/") + "/"; 
+		var absolutepath = path.dirname(document.uri.fsPath).replace(":", "").replace(/\\/g, "/") + "/";
 		console.log(absolutepath + path.basename(document.uri.fsPath));
 
 		cmd.get(
@@ -294,7 +333,7 @@ function updateDiagnostics(document: vscode.TextDocument, collection: vscode.Dia
 			//`scilla`,
 			function (err, data, stderr) {
 
-				//console.log(path.basename(document.uri.fsPath));
+				// console.log(path.basename(document.uri.fsPath));
 
 				if (data) {
 					var content = JSON.parse(data);
@@ -302,7 +341,7 @@ function updateDiagnostics(document: vscode.TextDocument, collection: vscode.Dia
 
 					var ScillaCollection = []
 
-					// Loop over all diagnostic messages
+					// loop over all diagnostic messages
 					for (let errNumber = 0; errNumber < numberOfErrMessages; errNumber++) {
 
 						var errMessage = content.warnings[errNumber].warning_message;
@@ -316,8 +355,8 @@ function updateDiagnostics(document: vscode.TextDocument, collection: vscode.Dia
 							code: errId, // feed the err id from scilla checker
 							message: errMessage, // feed inn err message from scilla checker
 							range: new vscode.Range(
-								new vscode.Position(errLine-1, errColumn-1), // position where err starts
-								new vscode.Position(errLine , errColumn )), // position where err ends
+								new vscode.Position(errLine - 1, errColumn - 1), // position where err starts
+								new vscode.Position(errLine, errColumn)), // position where err ends
 							severity: vscode.DiagnosticSeverity.Warning, // label these as warnings
 							source: 'Scilla Checker (linter)', // label this as err from scilla ckecker
 							relatedInformation: [
@@ -325,8 +364,8 @@ function updateDiagnostics(document: vscode.TextDocument, collection: vscode.Dia
 									new vscode.Location(
 										document.uri,
 										new vscode.Range(
-											new vscode.Position(errLine-1, errColumn-1),
-											new vscode.Position(errLine , errColumn)
+											new vscode.Position(errLine - 1, errColumn - 1), // position where err starts
+											new vscode.Position(errLine, errColumn) // position where err ends
 										)),
 									errMessage)
 
@@ -337,8 +376,8 @@ function updateDiagnostics(document: vscode.TextDocument, collection: vscode.Dia
 
 						// only create this diagnostic for scilla files
 						if (document && path.extname(document.uri.fsPath) === '.scilla') {
-							collection.set(document.uri, ScillaCollection); //send list of errs to VSCode
-							//vscode.window.showInformationMessage(errMessage);
+							collection.set(document.uri, ScillaCollection); // send list of errs to VSCode
+							// vscode.window.showInformationMessage(errMessage);
 
 						} else {
 							collection.clear();
@@ -346,10 +385,10 @@ function updateDiagnostics(document: vscode.TextDocument, collection: vscode.Dia
 					}
 
 				}
-				
+
 				if (stderr) {
 
-					// consuming data from syntax Error
+					// consuming data from syntax error
 					var content = JSON.parse(stderr);
 					var errtype = content.errors[0].error_message;
 					var errline = content.errors[0].start_location.line
@@ -361,15 +400,17 @@ function updateDiagnostics(document: vscode.TextDocument, collection: vscode.Dia
 						collection.set(document.uri, [{
 							code: '0',
 							message: errtype,
-							range: new vscode.Range(new vscode.Position(errline, errcolumn), new vscode.Position(errline+1, errcolumn+1)),
+							range: new vscode.Range(
+								new vscode.Position(errline - 1, errcolumn - 1), // position where err starts
+								new vscode.Position(errline, errcolumn)), // position where err ends
 							severity: vscode.DiagnosticSeverity.Error,
 							source: 'Scilla Checker (linter)',
 							relatedInformation: [new vscode.DiagnosticRelatedInformation(
 								new vscode.Location(
 									document.uri,
 									new vscode.Range(
-										new vscode.Position(errline-1, errcolumn-1),
-										new vscode.Position(errline, errcolumn)
+										new vscode.Position(errline - 1, errcolumn - 1), // position where err starts
+										new vscode.Position(errline, errcolumn) // position where err ends
 									)),
 								errMessage)]
 						}]);
@@ -377,7 +418,7 @@ function updateDiagnostics(document: vscode.TextDocument, collection: vscode.Dia
 						collection.clear();
 					}
 
-					//vscode.window.showInformationMessage(errtype);
+					// vscode.window.showInformationMessage(errtype);
 				}
 
 			}
@@ -387,6 +428,34 @@ function updateDiagnostics(document: vscode.TextDocument, collection: vscode.Dia
 		vscode.window.showInformationMessage('Install WSL to enable  linting & cashflow analysis');
 	}
 }
+
+
+function getWebviewContent(stateVariables, adtconstructors) {
+	return `<!DOCTYPE html>
+  <html lang="en">
+  <head>
+	  <meta charset="UTF-8">
+	  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	  <title>Scilla CashFlow Analysis</title>
+  </head>
+  <body>
+	 <h1>Scilla CashFlow Analysis </h1>
+
+	 <br />
+
+     <center>
+	 Finnished Analysing: ${stateVariables.length} State variables  &  ${adtconstructors.length} ADT 
+	 
+	 <br/>
+
+	 
+	 </center>
+
+  </body>
+  </html>`;
+}
+
+
 
 // this method is called when your extension is deactivated
 export function deactivate() {
