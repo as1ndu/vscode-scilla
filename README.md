@@ -12,6 +12,10 @@ Scilla, short for `Smart Contract Intermediate-Level Language`, is an intermedia
 
 ## Usage & Setup
 
+### To use   Casfflow analysis
+- Use CF via search blade `Ctlr + P`, then press `Ctrl + >` for PC &  Use CF via search blade `Cmd + P`, then press `Cmd + >` for MacBooks
+- Type in Scilla then select `Scilla Cash Flow Analyser`
+
 ### MacOS & Linux
 These steps are requires to run the Scilla linter & Cash flow analysis, 
 
@@ -46,38 +50,40 @@ $ export SCILLA_STDLIB_PATH="/path/to/scilla/standard/library/scilla-0.3.0/src/s
 Features are still a work in progress, as outlined in the roadmap below;
 
 - [X] Syntax Coloring
-    !["Scilla VSCode Screenshot"](./img/syntax.jpg)
+    !["Scilla VSCode Screenshot"](https://github.com/as1ndu/scilla/raw/master/img/syntax.jpg)
 
 - [ ] Support on Github
     - Pending
 
 - [X] Icons for Scilla files
-    !["Scilla VSCode Screenshot"](./img/icons.jpg)
+    !["Scilla VSCode Screenshot"](https://github.com/as1ndu/scilla/raw/master/img/icons.jpg)
 
 - [X] Code folding
-    !["Scilla VSCode Screenshot"](./img/codefolding.jpg)
+    !["Scilla VSCode Screenshot"](https://github.com/as1ndu/scilla/raw/master/img/codefolding.jpg)
 
 - [X] Auto-Completion
-    !["Scilla VSCode Screenshot"](./img/autocomplete.jpg)
+    !["Scilla VSCode Screenshot"](https://github.com/as1ndu/scilla/raw/master/img/autocomplete.jpg)
 
 - [X] Code Snippets
-    !["Scilla VSCode Screenshot"](./img/snippet.jpg)
+    !["Scilla VSCode Screenshot"](https://github.com/as1ndu/scilla/raw/master/img/snippet.jpg)
 
 - [ ] Formatting
     - pending
 
 - [X] Hover Information
-    !["Scilla VSCode Screenshot"](./img/hover.jpg)
+    !["Scilla VSCode Screenshot"](https://github.com/as1ndu/scilla/raw/master/img/hover.jpg)
 
 - [x] Linter (syntax errors & warnings)
-    !["Scilla VSCode Screenshot"](./img/errs.jpg)
-
-    !["Scilla VSCode Screenshot"](./img/warnings.jpg)
+    - Errors & Warnings
+    !["Scilla VSCode Screenshot"](https://github.com/as1ndu/scilla/raw/master/img/errs.jpg)
+    !["Scilla VSCode Screenshot"](https://github.com/as1ndu/scilla/raw/master/img/warnings.jpg)
 
 - [x] Cash Flow Analysis
-    !["Scilla VSCode Screenshot"](./img/cfSearchblade.jpg)
-    
-    !["Scilla VSCode Screenshot"](./img/cfwebview.jpg)
+    - Use CF via search blade `Ctlr + P`, then press `Ctrl + >` for PC &  Use CF via search blade `Cmd + P`, then press `Cmd + >` for MacBooks
+    !["Scilla VSCode Screenshot"](https://github.com/as1ndu/scilla/raw/master/img/cfSearchblade.jpg)
+
+    - Panel showing results of cashflow analysis
+    !["Scilla VSCode Screenshot"](https://github.com/as1ndu/scilla/raw/master/img/cfwebview.jpg)
 
 
 ## Requirements
