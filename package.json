@@ -2,7 +2,7 @@
     "name": "scilla",
     "displayName": "scilla",
     "description": "Smart Contract Intermediate Level Language",
-    "version": "0.5.3",
+    "version": "0.6.0",
     "author": {
         "name": "as1ndu",
         "url": "https://github.com/as1ndu/scilla"
@@ -35,16 +35,18 @@
     "contributes": {
         "menus": {
             "commandPalette": [
-              {
-                "command": "scilla.CashFlowAnalyser",
-                "when": "editorLangId == scilla"
-              }
+                {
+                    "command": "scilla.CashFlowAnalyser",
+                    "when": "editorLangId == scilla"
+                }
             ]
-          },
-        "commands":[{
-            "command": "scilla.CashFlowAnalyser",
-            "title": "Scilla Cash Flow Analyser"
-        }],
+        },
+        "commands": [
+            {
+                "command": "scilla.CashFlowAnalyser",
+                "title": "Scilla Cash Flow Analyser"
+            }
+        ],
         "languages": [
             {
                 "id": "scilla",
