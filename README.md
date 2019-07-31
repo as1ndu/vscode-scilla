@@ -12,9 +12,10 @@ Scilla, short for `Smart Contract Intermediate-Level Language`, is an intermedia
 
 ## Usage & Setup
 
-### To use   Casfflow analysis
-- Use CF via search blade `Ctlr + P`, then press `Ctrl + >` for PC &  Use CF via search blade `Cmd + P`, then press `Cmd + >` for MacBooks
-- Type in Scilla then select `Scilla Cash Flow Analyser`
+### To use   Cashflow analysis
+1. Open the Scilla file you want to analyse
+2. Use CF via search blade `Ctlr + P`, then press `Ctrl + >` for PC &  Use CF via search blade `Cmd + P`, then press `Cmd + >` for MacBooks
+3. Type in Scilla then select `Scilla Cash Flow Analyser`
 
 ### MacOS & Linux
 These steps are requires to run the Scilla linter & Cash flow analysis, 
@@ -79,8 +80,8 @@ Features are still a work in progress, as outlined in the roadmap below;
     !["Scilla VSCode Screenshot"](https://github.com/as1ndu/scilla/raw/master/img/warnings.jpg)
 
 - [x] Cash Flow Analysis
-    - Use CF via search blade `Ctlr + P`, then press `Ctrl + >` for PC &  Use CF via search blade `Cmd + P`, then press `Cmd + >` for MacBooks
-    !["Scilla VSCode Screenshot"](https://github.com/as1ndu/scilla/raw/master/img/cfSearchblade.jpg)
+    - Use CF via search blade `Ctlr + P`, then press `Ctrl + >` for PC &  Use CF via search blade `Cmd + P`, then press `Cmd + >` for MacBooks then select 
+    !["Scilla Cash Flow Analysis"](https://github.com/as1ndu/scilla/raw/master/img/cfSearchblade.jpg)
 
     - Panel showing results of cashflow analysis
     !["Scilla VSCode Screenshot"](https://github.com/as1ndu/scilla/raw/master/img/cfwebview.jpg)
