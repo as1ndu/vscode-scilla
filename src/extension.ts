@@ -294,15 +294,105 @@ export function activate(context: vscode.ExtensionContext) {
 						var CFstateVariables = content.cashflow_tags["State variables"];
 						var CFadtConstructors = content.cashflow_tags["ADT constructors"];
 
-						console.log(`Finnished Analysing: ${CFstateVariables.length} State variables  &  ${CFadtConstructors.length} ADT Constructors`);
 
-						panel.webview.html = getWebviewContent(CFstateVariables, CFadtConstructors);
+
+						//console.log(CFstateVariables);
+						var analysisTableRows = '';
+				 
+						console.log('creating table rows for from cashflow analysis');
+						for (let index = 0; index < CFstateVariables.length; index++) {
+
+							let cfVariable = CFstateVariables[index]['field'];
+							let cfTag = CFstateVariables[index]['tag'];
+
+							//var fullCFstatement = "";
+							//var shortCFstatement = "";
+							/*
+							var t = '';
+							var t1 = '';
+							var t2 = '';
+							switch (cfTag) {
+								// For Variables with 'NotInfo' tag
+								case 'NoInfo':
+									var fullCFstatement = "No information has been gathered about the variable. This sometimes (but not always) indicates that the variable is not being used, indicating a potential bug.";
+									var shortCFstatement = "❔ \ No information has been gathered about the variable.";
+									break;
+
+								// For Variables with 'NotMoney' tag
+								case 'NotMoney':
+									var fullCFstatement = "The variable represents something other than money.";
+									var shortCFstatement = "💿 \ Variable does not hold money.";
+									break;
+
+								// For Variables with 'Money' tag
+								case 'Money':
+									var fullCFstatement = "The variable represents money.";
+									var shortCFstatement = "💰 \ The variable represents Money.";
+									break;
+
+								// For Variables with 'Map t' tag
+								case 'Map':
+									var fullCFstatement = "The variable represents a map or a function whose co-domain is tagged with t. Hence, when performing a lookup in the map, or when applying a function on the values stored in the map, the result is tagged with t. Keys of maps are assumed to always be Not money. Using a variable as a function parameter does not give rise to a tag.";
+									var shortCFstatement = `🎲 \ When applying a function/lookup on the values stored in the map,
+            the result is tagged with as ${t}.`;
+									break;
+
+								// For Variables with 'Option t' tag
+								case 'Option':
+									var fullCFstatement = "The variable represents an option value, which, if it does not have the value None, contains the value Some x where x has tag t.";
+									var shortCFstatement = `💭 \ The variable represents an option value with tag ${t}.`;
+									break;
+
+								// For Variables with 'Pair t1 t2 ' tag
+								case 'Pair':
+									var fullCFstatement = "The variable represents a pair of values with tags t1 and t2, respectively.";
+									var shortCFstatement = `🌓 \ The variable represents a pair of values with tags ${t1} and ${t2}, respectively`;
+									break;
+
+								// For Variables with 'Inconsistent' tag
+								case 'Inconsistent':
+									var fullCFstatement = "The variable represents something other than money";
+									var shortCFstatement = `🐞 \ The variable has been used to represent both Money and not Money.`;
+									break;
+
+								default:
+									var fullCFstatement = "undefined";
+									var shortCFstatement = `undefined`;
+							}
+							*/
+
+
+                           
+							var analysisTableRow = `
+								<tr>
+									<td>${cfVariable}</td>
+									<td>${cfTag}</td>
+								</tr>`
+
+							var analysisTableRows = analysisTableRows.concat(analysisTableRow)
+							//console.log(analysisTableRows);
+
+						}
+
+
+						console.log(`Finnished Analysing: ${CFstateVariables.length} State variables  &  ${CFadtConstructors.length} ADT Constructors`);
+						var CFstateVariablesLength = CFstateVariables.length;
+
+						if (CFstateVariables.length == 0) {
+							CFstateVariables = {
+								"field": "none",
+								"tag": "none"
+							}
+
+							CFstateVariablesLength = 0;
+						}
+
+						console.log('Rendering WebView');
+						panel.webview.html = getWebviewContent(CFstateVariablesLength, CFadtConstructors, analysisTableRows);
 
 					}
 				});
 		}
-
-
 	});
 
 
@@ -430,32 +520,204 @@ function updateDiagnostics(document: vscode.TextDocument, collection: vscode.Dia
 }
 
 
-function getWebviewContent(stateVariables, adtconstructors) {
-	return `<!DOCTYPE html>
-  <html lang="en">
-  <head>
-	  <meta charset="UTF-8">
-	  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	  <title>Scilla CashFlow Analysis</title>
-  </head>
-  <body>
-	 <h1>Scilla CashFlow Analysis </h1>
+function getWebviewContent(CFstateVariablesLength, adtconstructors, tableRows) {
+	return `
+	<!DOCTYPE html>
+<html lang="en">
 
-	 <br />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scilla CashFlow Analysis</title>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
 
-     <center>
-	 Finnished Analysing: ${stateVariables.length} State variables  &  ${adtconstructors.length} ADT 
-	 
-	 <br/>
+        td,
+        th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
 
-	 
-	 </center>
+        tr:nth-child(odd) {
+            background-color: #000000;
+            color: #dddddd;
+        }
 
-  </body>
-  </html>`;
+        tr:nth-child(even) {
+            background-color: #dddddd;
+            color: #000000;
+        }
+
+        body {
+            background-image: url("./logo-128x128.png");
+            background-repeat: repeat;
+            background-color: #000000;
+            padding-left: 5%;
+            padding-right: 10%;
+        }
+
+        h1 {
+            background-color: #00000071;
+            color: #dddddd;
+        }
+
+        h3 {
+            color: #dddddd;
+            background-color: #000000;
+        }
+
+        p,
+        ol,
+        details {
+            color: #dddddd;
+            background-color: #000000;
+            max-width: 100%;
+        }
+
+        li {
+            color: teal;
+        }
+
+        b {
+            font-size: large;
+        }
+
+        a {
+            color: teal;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>
+        <img src="./scilla-header.png" height="64" width="64">
+        <br />
+        Scilla CashFlow Analysis.
+    </h1>
+
+    <hr />
+
+    <br />
+
+    <center>
+        <h3>Analysed: ${CFstateVariablesLength} State variables**</h3>
+
+        <br />
+
+        <table>
+            <tr>
+                <th>Field</th>
+                <th>Tag</th>
+            </tr>
+
+            ${tableRows}
+
+        </table>
+
+    </center>
+
+    <br />
+
+
+    <p>
+        The cashflow analysis phase analyzes the usage of a contract’s variables and fields, and attempts to
+        determine
+        which fields are used to represent (native) blockchain money. Each contract field is annotated with a tag
+        indicating the field’s usage.
+    </p>
+
+
+    <ol>
+        <h3>The analysis uses the following set of tags:</h3>
+        <li>
+            <b>❔ No Information:</b>
+            <label>
+                <details>
+                    No information has been gathered about the variable. This sometimes (but not always) indicates that
+                    the variable is not being used, indicating a potential bug.
+                </details>
+            </label>
+        </li>
+        <li>
+            <b>💰 Money:</b>
+            <label>
+                <details>
+                    The variable represents money.
+                </details>
+            </label>
+        </li>
+        <li>
+            <b>💿 Not Money:</b>
+            <label>
+                <details>
+                    The variable represents something other than money.
+                </details>
+            </label>
+        </li>
+        <li>
+            <b>🐞 Inconsistent:</b>
+            <label>
+                <details>
+                    The variable has been used to represent both money and not money. Inconsistent usage indicates a
+                    bug.
+                </details>
+            </label>
+        </li>
+        <li>
+            <b>🎲 Map t (where t is a tag):</b>
+            <label>
+                <details>
+                    The variable represents a map or a function whose co-domain is tagged with t. Hence, when performing
+                    a lookup in the map, or when applying a function on the values stored in the map, the result is
+                    tagged with t. Keys of maps are assumed to always be Not money. Using a variable as a function
+                    parameter does not give rise to a tag.
+                </details>
+            </label>
+        </li>
+
+        <li>
+            <b>💭 Option t (where t is a tag):</b>
+            <label>
+                <details>
+                    The variable represents an option value, which, if it does not have the value None, contains the
+                    value Some x where x has tag t.
+                </details>
+            </label>
+        </li>
+        <li>
+            <b>🌓 Pair t1 t2 (where t1 and t2 are tags):</b>
+            <label>
+                <details>
+                    The variable represents a pair of values with tags t1 and t2, respectively.
+                </details>
+            </label>
+        </li>
+    </ol>
+
+
+
+    <p>
+        **The resulting tags are an approximation based on the usage of each contract field, and the usage of local
+        variables in the contract. The tags are not guaranteed to be accurate, but are intended as a tool to help
+        the
+        contract developer use her fields in the intended manner.
+
+        <a href="https://scilla.readthedocs.io/en/latest/scilla-checker.html#cashflow-analysis">Learn more about
+            Scilla's cashflow analysis</a>
+    </p>
+
+
+
+</body>
+
+</html>
+	`;
 }
-
-
 
 // this method is called when your extension is deactivated
 export function deactivate() {

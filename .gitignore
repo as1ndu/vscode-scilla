@@ -1,5 +1,5 @@
-token.txt
-node_modules
+secrets.txt
 out
+node_modules
 .vscode/settings.json
 .vscode/ipch
