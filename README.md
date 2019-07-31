@@ -92,8 +92,6 @@ Features are still a work in progress, as outlined in the roadmap below;
 Latest version of [Visual Studio Code (VSCode)](https://code.visualstudio.com/) i.e VSCode Engine 1.34.0 & above
 
 ## Screenshot
-!["Scilla VSCode Screenshot"](./img/screenshot.jpg)
-
 !["Scilla VSCode Screenshot"](https://github.com/as1ndu/scilla/raw/master/img/screenshot.jpg)
 
 
