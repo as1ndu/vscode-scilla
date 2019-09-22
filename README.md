@@ -50,11 +50,19 @@ $ export SCILLA_STDLIB_PATH="/path/to/scilla/standard/library/scilla-0.3.0/src/s
 
 Features are still a work in progress, as outlined in the roadmap below;
 
+## Upcoming features
+
+- [ ] Gas  Flow Analysis
+- [ ] Show types of variables on hover
+- [ ] Allow configuration of scilla binaries without configuring the `PATH`
+
+## Completed features
+
 - [X] Syntax Coloring
     !["Scilla VSCode Screenshot"](https://github.com/as1ndu/scilla/raw/master/img/syntax.jpg)
 
-- [ ] Support on Github
-    - Pending
+- [X] Support on Github
+    - Implimented, [awaiting to be merged](https://github.com/github/linguist/pull/4635#partial-pull-merging)
 
 - [X] Icons for Scilla files
     !["Scilla VSCode Screenshot"](https://github.com/as1ndu/scilla/raw/master/img/icons.jpg)
@@ -68,8 +76,8 @@ Features are still a work in progress, as outlined in the roadmap below;
 - [X] Code Snippets
     !["Scilla VSCode Screenshot"](https://github.com/as1ndu/scilla/raw/master/img/snippet.jpg)
 
-- [ ] Formatting
-    - pending
+- [X] Formatting
+    - `Use Shift + Alt + F` to format your code
 
 - [X] Hover Information
     !["Scilla VSCode Screenshot"](https://github.com/as1ndu/scilla/raw/master/img/hover.jpg)
@@ -80,7 +88,7 @@ Features are still a work in progress, as outlined in the roadmap below;
     !["Scilla VSCode Screenshot"](https://github.com/as1ndu/scilla/raw/master/img/warnings.jpg)
 
 - [x] Cash Flow Analysis
-    - Use CF via search blade `Ctlr + P`, then press `Ctrl + >` for PC &  Use CF via search blade `Cmd + P`, then press `Cmd + >` for MacBooks then select 
+    - Use CF via the search blade `Ctlr + P`, then press `Ctrl + >` for PC &  Use CF via search blade `Cmd + P`, then press `Cmd + >` for MacBooks then select 
     !["Scilla Cash Flow Analysis"](https://github.com/as1ndu/scilla/raw/master/img/cfSearchblade.jpg)
 
     - Panel showing results of cashflow analysis

@@ -1,6 +1,6 @@
-/*---------------------------------------------------------
- * Copyright (C) 2019 Asindu Willfred Drileba. All rights reserved.
- *--------------------------------------------------------*/
+/*------------------------------------------------------------------*
+ * Copyright (C) 2019 Asindu Willfred Drileba. All rights reserved. *
+ *------------------------------------------------------------------*/
 
 'use strict';
 
@@ -8,6 +8,7 @@ import * as vscode from 'vscode';
 import * as os from 'check-os';
 import * as cmd from 'node-cmd';
 import * as path from 'path';
+import * as fmt from './fmt';
 
 export function activate(context: vscode.ExtensionContext) {
 
@@ -268,7 +269,6 @@ export function activate(context: vscode.ExtensionContext) {
 		}
 	});
 
-
 	// CashFlow Analyser
 	let CashFlowAnalyser = vscode.commands.registerCommand('scilla.CashFlowAnalyser', () => {
 
@@ -293,8 +293,6 @@ export function activate(context: vscode.ExtensionContext) {
 						var content = JSON.parse(data);
 						var CFstateVariables = content.cashflow_tags["State variables"];
 						var CFadtConstructors = content.cashflow_tags["ADT constructors"];
-
-
 
 						//console.log(CFstateVariables);
 						var analysisTableRows = '';
@@ -395,7 +393,7 @@ export function activate(context: vscode.ExtensionContext) {
 		}
 	});
 
-
+    // Linter feature
 	const collection = vscode.languages.createDiagnosticCollection('scilla');
 	if (vscode.window.activeTextEditor) {
 		updateDiagnostics(vscode.window.activeTextEditor.document, collection);
@@ -403,7 +401,36 @@ export function activate(context: vscode.ExtensionContext) {
 	var linterFeature = vscode.window.onDidChangeActiveTextEditor(e => updateDiagnostics(e.document, collection));
 	var linterFeature2 = vscode.workspace.onDidChangeTextDocument(e => updateDiagnostics(e.document, collection));
 
-	context.subscriptions.push(hoverFeature, autocompleteFeature, linterFeature, linterFeature2, CashFlowAnalyser);
+	// Code formatting
+	let codeFormatting = vscode.languages.registerDocumentFormattingEditProvider('scilla', {
+		provideDocumentFormattingEdits(document: vscode.TextDocument): vscode.TextEdit[] {
+
+			let fullText = document.getText() // get all the Scilla code
+			let fullRange = new vscode.Range(
+				document.positionAt(0),
+				document.positionAt(fullText.length - 1)
+				)
+
+			let formattedScillaCode = fmt.ScillaCode(fullText)
+
+			if (formattedScillaCode[1] == 'success') {
+				vscode.window.showInformationMessage('Scilla code formating sucessfull!') 
+				return [vscode.TextEdit.replace(fullRange, formattedScillaCode[0])];
+			}
+
+			if (formattedScillaCode[1] == 'fail') {
+				vscode.window.showErrorMessage('Indentation err, please correct the syntax of your code first');
+				return [vscode.TextEdit.replace(fullRange, fullText)];
+			}
+
+			//return [vscode.TextEdit.replace(fullRange, formattedScillaCode[0])];
+		  
+		}
+	  });
+
+
+    // Push all features into VScode's context
+	context.subscriptions.push(hoverFeature, autocompleteFeature, linterFeature, linterFeature2, CashFlowAnalyser, codeFormatting);
 }
 
 function updateDiagnostics(document: vscode.TextDocument, collection: vscode.DiagnosticCollection): void {
@@ -518,7 +545,6 @@ function updateDiagnostics(document: vscode.TextDocument, collection: vscode.Dia
 		vscode.window.showInformationMessage('Install WSL to enable  linting & cashflow analysis');
 	}
 }
-
 
 function getWebviewContent(CFstateVariablesLength, adtconstructors, tableRows) {
 	return `
@@ -711,14 +737,12 @@ function getWebviewContent(CFstateVariablesLength, adtconstructors, tableRows) {
             Scilla's cashflow analysis</a>
     </p>
 
-
-
 </body>
 
 </html>
 	`;
 }
 
-// this method is called when your extension is deactivated
+// this method is called when the extension is deactivated
 export function deactivate() {
 }
