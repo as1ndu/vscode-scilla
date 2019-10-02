@@ -37,6 +37,10 @@
                 {
 					"match": "(?<=transition )[^(]+",
 					"name": "entity.name.function.scilla"
+                },
+                {
+					"match": "(?<=field )[^:]+",
+					"name": "variable.other.readwrite.scilla"
 				}
             ]
         }
