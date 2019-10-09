@@ -39,22 +39,30 @@ $ export SCILLA_STDLIB_PATH="/path/to/scilla/standard/library/scilla-0.3.0/src/s
 1. Install Windows Subsystem for Linux (WSL)
 2. Install the [WSL VScode Extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl) (Yes, its different from 1 above)
 3. Test it too & [ensure it works](https://code.visualstudio.com/docs/remote/wsl)
-4. Follows steps 1 to 4 for MacOS/Linux via the _ Windows Subsystem for Linux (WSL) terminal_ (i.e installing the scilla interpreter, adding `SCILLA_STDLIB_PATH` & the scilla binaries to your `PATH` )
+4. Follows steps 1 to 4 for MacOS/Linux via the _Windows Subsystem for Linux (WSL) terminal_ (i.e installing the scilla interpreter, adding `SCILLA_STDLIB_PATH` & the scilla binaries to your `PATH` )
 5. Open the scilla code you intend to work on in [WSL mode](https://code.visualstudio.com/docs/remote/wsl)
 6. You can now install the scilla plugin from the [market place](https://marketplace.visualstudio.com/items?itemName=as1ndu.scilla) (with WSL mode enabled)
 
-> P.S VSCodes's WSL mode on windows keeps a separate collection of extension i.e the some features of the extension _may not work outside WSL mode._
-
+> P.S VSCodes's WSL mode on windows keeps a separate collection of extensions i.e the some features of the extension _may not work outside WSL mode._
 
 ## Features
 
 Features are still a work in progress, as outlined in the roadmap below;
 
 ## Upcoming features
-
-- [ ] Gas  Flow Analysis
-- [ ] Show types of variables on hover
-- [ ] Allow configuration of scilla binaries without configuring the `PATH`
+- [ ] Configurations based on `.vscode` for;
+    - [ ] Gas limit
+    - [ ] Path to scilla binaries
+    - [ ] Path to Stdlib
+- [ ] Gas Usage Analyser
+- [ ] Fix bugs: 
+    - [ ] Space between `end` on formatting
+    - [ ] Stop Scilla icon theme from over riding inbuilt SETI theme
+- [ ] Show types of variables on hover variable.
+- [ ] Fix highlighting for `builtin`s
+- Support for `procedure`s
+    - [ ] Formatting
+    - [ ] Syntax highligting
 
 ## Completed features
 
