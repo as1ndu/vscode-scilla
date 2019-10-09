@@ -35,9 +35,18 @@
         "description": "create field (mutable variable)"
     },
 
+    "let (snippet)": {
+        "prefix": "field",
+        "body": [
+            "let variable_1  = '$1' ",
+            "$2"
+        ],
+        "description": "binding variables"
+    },
+
     "scilla (snippet)": {
         "prefix": "scilla",
-        "body": ["(* Scilla contract structure *)\n\n(***************************************************)\n(*                 Scilla version                  *)\n(***************************************************)\n\nscilla_version 0\n\n(***************************************************)\n(*               Associated library                *)\n(***************************************************)\n\nlibrary MyContractLib\n\n\n(* Library code block follows *)\n\n\n\n(***************************************************)\n(*             Contract definition                 *)\n(***************************************************)\n\ncontract MyContract\n\n(* Immutable fields declaration *)\n\n(vname_1 : vtype_1,\n vname_2 : vtype_2)\n\n(* Mutable fields declaration *)\n\nfield vname_1 : vtype_1 = init_val_1\nfield vname_2 : vtype_2 = init_val_2\n\n(* Transitions *)\n\n\n(* Transition signature *)\ntransition firstTransition (param_1 : type_1, param_2 : type_2)\n  (* Transition body *)\n\nend\n\ntransition secondTransition (param_1: type_1)\n  (* Transition body *)\n\nend","$2"],
+        "body": ["(***************************************************)\n(*                 Scilla version                  *)\n(***************************************************)\n\nscilla_version 0\n\n(***************************************************)\n(*               Associated library                *)\n(***************************************************)\n\nlibrary MyContractLib\n\n\n(* Library code block follows *)\n\n\n\n(***************************************************)\n(*             Contract definition                 *)\n(***************************************************)\n\ncontract MyContract\n\n(* Immutable fields declaration *)\n\n(vname_1 : vtype_1,\n vname_2 : vtype_2)\n\n(* Mutable fields declaration *)\n\nfield vname_1 : vtype_1 = init_val_1\nfield vname_2 : vtype_2 = init_val_2\n\n(* Transitions *)\n\n\n(* Transition signature *)\ntransition firstTransition (param_1 : type_1, param_2 : type_2)\n  (* Transition body *)\n\nend\n\ntransition secondTransition (param_1: type_1)\n  (* Transition body *)\n\nend","$2"],
         
         "description": "create a new scilla contract"
     }
