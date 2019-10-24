@@ -58,6 +58,22 @@ Features are still a work in progress, as outlined in the roadmap below;
 - [ ] Fix bugs: 
     - [ ] Space between `end` on formatting
     - [ ] Stop Scilla icon theme from over riding inbuilt SETI theme
+    - [ ] Multiline Coments i.e
+    ```
+    (*
+        * Bookstore Contract
+        * 
+        * This contract demonstrates how a developer can build a CRUD-like smart contract easily.
+        * Concepts covered:
+        * - Procedures
+        * - Custom ADTs
+        * - Simple Access Controls
+        * 
+        * Access control logic is delibrately left out for brevity. You can reference AddMember
+        * for how you can implement access control to prevent unauthorised access to transitions.
+    *)
+    ```
+    
 - [ ] Show types of variables on hover variable.
 - [ ] Fix highlighting for `builtin`s
 - Support for `procedure`s
