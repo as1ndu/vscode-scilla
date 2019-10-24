@@ -2,6 +2,7 @@
     "name": "scilla",
     "displayName": "scilla",
     "description": "Smart Contract Intermediate Level Language",
+    "license": "MIT",
     "version": "1.0.0",
     "author": {
         "name": "as1ndu",
