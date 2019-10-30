@@ -428,9 +428,57 @@ export function activate(context: vscode.ExtensionContext) {
 		}
 	  });
 
+    // Modidify Gas Limit
+	let modifyGaslimit = vscode.commands.registerCommand('scilla.ModifyGasLimit', () => {
+		let GaslimitConfiguration = vscode.workspace.getConfiguration('launch', vscode.window.activeTextEditor.document.uri);
+
+		async function showInputBox() {
+			const newGasLimit = await vscode.window.showInputBox({
+				value: '',
+				placeHolder: 'Gas limit is expected to be a integer i.e 8000'
+			});
+			
+            GaslimitConfiguration.update('scillaGasLimit', `${newGasLimit}` );
+		    vscode.window.showInformationMessage(`Gas limit set to ${newGasLimit}`);
+		}
+		showInputBox() 
+	});
+
+	// Modify Scilla bin directory
+	let modifyScillaBinLocation = vscode.commands.registerCommand('scilla.modifyScillaBinaryLocation', () => {
+		let ScillaBinLocationConfiguration = vscode.workspace.getConfiguration('launch', vscode.window.activeTextEditor.document.uri);
+	
+		async function showInputBox() {
+			const newScillaBinLocation = await vscode.window.showInputBox({
+				value: '',
+				placeHolder: 'Enter an absolute directory to the Scilla binaries e.g */mnt/c/path/to/scilla-0.4.0/bin*'
+			});
+			
+            ScillaBinLocationConfiguration.update('scillaBinLocation', `${newScillaBinLocation}` );
+		    vscode.window.showInformationMessage(`Scilla bin directory set to ${newScillaBinLocation}`);
+		}
+		showInputBox() 
+	});
+
+	// Modify Standard library location directory
+	let modifySTDLIBLocation = vscode.commands.registerCommand('scilla.modifySTDLIBLocation', () => {
+		let STDLIBLocationConfiguration = vscode.workspace.getConfiguration('launch', vscode.window.activeTextEditor.document.uri);
+	
+		async function showInputBox() {
+			const newSTDLIBLocation = await vscode.window.showInputBox({
+				value: '',
+				placeHolder: 'Enter an absolute directory to the Scilla binaries e.g */mnt/c/path/to/scilla-0.4.0/src/stdlib*'
+			});
+			
+            STDLIBLocationConfiguration.update('scillaStandardLibrary', `${newSTDLIBLocation}` );
+		    vscode.window.showInformationMessage(`Scilla bin directory set to  ${newSTDLIBLocation}`);
+		}
+		showInputBox() 
+	});
+ 
 
     // Push all features into VScode's context
-	context.subscriptions.push(hoverFeature, autocompleteFeature, linterFeature, linterFeature2, CashFlowAnalyser, codeFormatting);
+	context.subscriptions.push(hoverFeature, autocompleteFeature, linterFeature, linterFeature2, CashFlowAnalyser, codeFormatting,  modifyGaslimit, modifyScillaBinLocation, modifySTDLIBLocation );
 }
 
 function updateDiagnostics(document: vscode.TextDocument, collection: vscode.DiagnosticCollection): void {
@@ -443,14 +491,24 @@ function updateDiagnostics(document: vscode.TextDocument, collection: vscode.Dia
 
 		// convert  absolute windows path to linux path
 		var absolutepath = path.dirname(document.uri.fsPath).replace(":", "").replace(/\\/g, "/") + "/";
+
 		console.log(absolutepath + path.basename(document.uri.fsPath));
 
+		let scillaConfig = vscode.workspace.getConfiguration('launch', vscode.window.activeTextEditor.document.uri);
+
+		let binariesPath = scillaConfig.get('scillaBinLocation');
+		let STDLIB = scillaConfig.get('scillaStandardLibrary');
+		let gasLimit = scillaConfig.get('scillaGasLimit');
+
+		console.log(binariesPath, STDLIB, gasLimit)
+		
 		cmd.get(
-			`scilla-checker -libdir SCILLA_STDLIB_PATH  ${absolutepath + path.basename(document.uri.fsPath)} -jsonerrors`,
+			`${binariesPath + '/scilla-checker' } -libdir ${STDLIB} -gaslimit ${gasLimit}   ${absolutepath + path.basename(document.uri.fsPath)} -jsonerrors`,
 			//`scilla`,
 			function (err, data, stderr) {
 
 				// console.log(path.basename(document.uri.fsPath));
+				console.log(`${binariesPath + 'scilla-checker' } -libdir ${STDLIB} -gaslimit ${gasLimit}   ${absolutepath + path.basename(document.uri.fsPath)} -jsonerrors`)
 
 				if (data) {
 					var content = JSON.parse(data);

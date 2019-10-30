@@ -39,13 +39,37 @@
                 {
                     "command": "scilla.CashFlowAnalyser",
                     "when": "editorLangId == scilla"
+                },
+                {
+                    "command": "scilla.ModifyGasLimit",
+                    "when": "editorLangId == scilla"
+                },
+                {
+                    "command": "scilla.modifyScillaBinaryLocation",
+                    "when": "editorLangId == scilla"
+                },
+                {
+                    "command": "scilla.modifySTDLIBLocation",
+                    "when": "editorLangId == scilla"
                 }
             ]
         },
         "commands": [
             {
                 "command": "scilla.CashFlowAnalyser",
-                "title": "Scilla Cash Flow Analyser"
+                "title": "Scilla: Cash Flow Analyser"
+            },
+            {
+                "command": "scilla.ModifyGasLimit",
+                "title": "Scilla: Set Gas Limit for Scilla"
+            },
+            {
+                "command": "scilla.modifyScillaBinaryLocation",
+                "title": "Scilla: Set location for Scilla binaries"
+            },
+            {
+                "command": "scilla.modifySTDLIBLocation",
+                "title": "Scilla: Set location for Scilla's standard library"
             }
         ],
         "languages": [

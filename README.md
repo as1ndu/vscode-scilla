@@ -76,6 +76,7 @@ Features are still a work in progress, as outlined in the roadmap below;
     
 - [ ] Show types of variables on hover variable.
 - [ ] Fix highlighting for `builtin`s
+- [ ] Minify contracts
 - Support for `procedure`s
     - [ ] Formatting
     - [ ] Syntax highligting
