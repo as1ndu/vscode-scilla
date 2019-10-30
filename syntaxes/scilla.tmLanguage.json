@@ -9,7 +9,7 @@
         "main": {
             "patterns": [
                 {
-                    "match": "\\b(let|contains|delete|put|remove|library|import|contract|event|field|send|fun|transition|match|end|with|builtin|Emp)\\b",
+                    "match": "\\b(let|contains|delete|put|remove|library|import|contract|event|field|send|fun|transition|procedure|match|end|with|builtin|Emp)\\b",
                     "name": "keyword.control.scilla"
                 },
                 {

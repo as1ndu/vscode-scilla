@@ -50,14 +50,14 @@ $ export SCILLA_STDLIB_PATH="/path/to/scilla/standard/library/scilla-0.3.0/src/s
 Features are still a work in progress, as outlined in the roadmap below;
 
 ## Upcoming features
-- [ ] Configurations based on `.vscode` for;
-    - [ ] Gas limit
-    - [ ] Path to scilla binaries
-    - [ ] Path to Stdlib
+- [X] Configurations based on `.vscode` for;
+    - [X] Gas limit
+    - [X] Path to scilla binaries
+    - [X] Path to Stdlib
 - [ ] Gas Usage Analyser
 - [ ] Fix bugs: 
     - [ ] Space between `end` on formatting
-    - [ ] Stop Scilla icon theme from over riding inbuilt SETI theme
+    - [ ] Stop Scilla icon theme from overriding inbuilt SETI theme
     - [ ] Multiline Coments i.e
     ```
     (*
@@ -79,7 +79,7 @@ Features are still a work in progress, as outlined in the roadmap below;
 - [ ] Minify contracts
 - Support for `procedure`s
     - [ ] Formatting
-    - [ ] Syntax highligting
+    - [X] Syntax highligting
 
 ## Completed features
 

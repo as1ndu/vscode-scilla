@@ -285,7 +285,13 @@ export function activate(context: vscode.ExtensionContext) {
 			var absolutepath = path.dirname(vscode.window.activeTextEditor.document.uri.fsPath).replace(":", "").replace(/\\/g, "/") + "/";
 
 			console.log('Waiting for data from scilla-checker')
-			cmd.get(`scilla-checker -cf -libdir SCILLA_STDLIB_PATH  ${absolutepath + path.basename(vscode.window.activeTextEditor.document.uri.fsPath)} -jsonerrors`,
+			let scillaConfig = vscode.workspace.getConfiguration('launch', vscode.window.activeTextEditor.document.uri);
+
+			let binariesPath = scillaConfig.get('scillaBinLocation');
+			let STDLIB = scillaConfig.get('scillaStandardLibrary');
+			let gasLimit = scillaConfig.get('scillaGasLimit');
+
+			cmd.get(`${binariesPath + '/scilla-checker' } -cf  -libdir ${STDLIB} -gaslimit ${gasLimit}  ${absolutepath + path.basename(vscode.window.activeTextEditor.document.uri.fsPath)} -jsonerrors`,
 
 				function (err, data, stderr) {
 					if (data) {
@@ -499,8 +505,6 @@ function updateDiagnostics(document: vscode.TextDocument, collection: vscode.Dia
 		let binariesPath = scillaConfig.get('scillaBinLocation');
 		let STDLIB = scillaConfig.get('scillaStandardLibrary');
 		let gasLimit = scillaConfig.get('scillaGasLimit');
-
-		console.log(binariesPath, STDLIB, gasLimit)
 		
 		cmd.get(
 			`${binariesPath + '/scilla-checker' } -libdir ${STDLIB} -gaslimit ${gasLimit}   ${absolutepath + path.basename(document.uri.fsPath)} -jsonerrors`,
@@ -508,7 +512,7 @@ function updateDiagnostics(document: vscode.TextDocument, collection: vscode.Dia
 			function (err, data, stderr) {
 
 				// console.log(path.basename(document.uri.fsPath));
-				console.log(`${binariesPath + 'scilla-checker' } -libdir ${STDLIB} -gaslimit ${gasLimit}   ${absolutepath + path.basename(document.uri.fsPath)} -jsonerrors`)
+				// console.log(`${binariesPath + 'scilla-checker' } -libdir ${STDLIB} -gaslimit ${gasLimit}   ${absolutepath + path.basename(document.uri.fsPath)} -jsonerrors`)
 
 				if (data) {
 					var content = JSON.parse(data);
