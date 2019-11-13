@@ -13,7 +13,7 @@
                     "name": "keyword.control.scilla"
                 },
                 {
-                    "match": "([\\(\\*].*(?:\\*\\)))",
+                    "match": "\\(\\*[\\s\\S]*?\\*\\)",
                     "name": "comment.block.documentation.scilla"
                 },
                 {

@@ -58,7 +58,7 @@ Features are still a work in progress, as outlined in the roadmap below;
 - [ ] Fix bugs: 
     - [ ] Space between `end` on formatting
     - [ ] Stop Scilla icon theme from overriding inbuilt SETI theme
-    - [ ] Multiline Coments i.e
+    - [X] Multiline Coments i.e
     ```
     (*
         * Bookstore Contract
