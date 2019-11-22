@@ -56,7 +56,6 @@ Features are still a work in progress, as outlined in the roadmap below;
     - [X] Path to Stdlib
 - [ ] Gas Usage Analyser
 - [ ] Fix bugs: 
-    - [ ] Space between `end` on formatting
     - [ ] Stop Scilla icon theme from overriding inbuilt SETI theme
     - [X] Multiline Coments i.e
     ```
@@ -77,8 +76,8 @@ Features are still a work in progress, as outlined in the roadmap below;
 - [ ] Show types of variables on hover variable.
 - [ ] Fix highlighting for `builtin`s
 - [ ] Minify contracts
+- [ ] Use built in [AST](https://github.com/Zilliqa/scilla/pull/696) instead of current [RegEx based formatter](https://github.com/as1ndu/scilla-fmt)
 - Support for `procedure`s
-    - [ ] Formatting
     - [X] Syntax highligting
 
 ## Completed features
