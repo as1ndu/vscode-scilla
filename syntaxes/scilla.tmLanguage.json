@@ -9,12 +9,13 @@
         "main": {
             "patterns": [
                 {
-                    "match": "\\b(let|contains|delete|put|remove|library|import|contract|event|field|send|fun|transition|procedure|match|end|with|builtin|Emp)\\b",
+                    "match": "\\b(let|contains|delete|put|remove|library|import|contract|event|field|send|fun|transition|procedure|match|end|with|builtin|Emp|of)\\b",
                     "name": "keyword.control.scilla"
                 },
                 {
-                    "match": "\\(\\*[\\s\\S]*?\\*\\)",
-                    "name": "comment.block.documentation.scilla"
+                    "name": "comment.block.documentation.scilla",
+                    "begin": "\\(\\*",
+                    "end": "\\*\\)"
                 },
                 {
                     "match": "\\b(String|Uint32|Uint64|Uint128|Uint256|Int32|Int64|Int128|Int256|Map|True|False|ByStr20|ByStr32|ByStr64|ByStr33|BNum|Option|None|Bool|Some|List|Cons|Pair|type|scilla_version|Zero|Succ|Message)\\b",
@@ -34,7 +35,7 @@
                     "name": "constant.numeric.scilla"
                 },
                 {
-                    "match": "(\\|)|(\\=\\>)|(\\<)|(\\>)|(\\-)|(\\:\\=)|(\\=)",
+                    "match": "(\\|)|(\\=\\>)|(\\<)|(\\>)|(\\-)|(\\:\\=)|(\\=)|(\\[)|(\\])|(\\{)|(\\})|(\\()|(\\))",
                     "name": "invalid.illegal.expected-dictionary-separator.scilla"
                 },
                 {
@@ -43,6 +44,10 @@
                 },
                 {
                     "match": "(?<=procedure )[^(]+",
+                    "name": "entity.name.function.scilla"
+                },
+                {
+                    "match": "(?<=procedure )[^w]+",
                     "name": "entity.name.function.scilla"
                 }
             ]
