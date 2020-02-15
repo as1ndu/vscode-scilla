@@ -12,7 +12,8 @@
         ["(", ")"],
         [ "(*", "*)" ],
         [ "match", "end"],
-        [ "transition", "end"]
+        [ "transition", "end"],
+        [ "procedure", "end"]
     ],
     // symbols that are auto closed when typing
     "autoClosingPairs": [
@@ -33,6 +34,8 @@
         [ "(*", "*)" ]
     ],
 
+
+    // determines the point at which to start folding the code from
     "folding": {
         "markers": {
           "start": "^\\s*//\\s*#?region\\b",
@@ -40,6 +43,7 @@
         }
       },
 
+    // determins none symbols/numbers
     "wordPattern": "(-?\\d*\\.\\d\\w*)|([^\\`\\~\\!\\@\\#\\%\\^\\&\\*\\(\\)\\-\\=\\+\\[\\{\\]\\}\\\\\\|\\;\\:\\'\\\"\\,\\.\\<\\>\\/\\?\\s]+)",
     "indentationRules": {
         "increaseIndentPattern": "^((?!\\/\\/).)*(\\{[^}\"'`]*|\\([^)\"'`]*|\\[[^\\]\"'`]*)$",

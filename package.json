@@ -54,6 +54,35 @@
                 }
             ]
         },
+        "configuration":{
+            "title": "Scilla configurations",
+            
+            "properties": {
+                "scilla.pathToBinaries":{
+                    "type":"string",
+                    "default":"empty",
+                    "description":"Put the absolute path of the locally compiled scilla binaries."
+                },
+
+                "scilla.pathToStandardLib":{
+                    "type":"string",
+                    "default":"empty",
+                    "description": "Location of the stanbdard lib"
+                },
+
+                "scilla.cfaTag":{
+                    "type":"array",
+                    "default":[],
+                    "description": "Variables to consider as cash during cash flow analysis."
+                },
+
+                "scilla.remoteDebugging":{
+                    "type":"boolean",
+                    "default":true,
+                    "description": "Use a remote instance to debuge scilla files. No need to compile scilla files"
+                }
+            }
+        },
         "commands": [
             {
                 "command": "scilla.CashFlowAnalyser",
