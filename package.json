@@ -3,7 +3,7 @@
     "displayName": "scilla",
     "description": "Smart Contract Intermediate Level Language",
     "license": "MIT",
-    "version": "1.2.0",
+    "version": "1.3.0",
     "author": {
         "name": "as1ndu",
         "url": "https://github.com/as1ndu/scilla"
@@ -55,9 +55,9 @@
                     "default": "empty",
                     "description": "The absolute path to the standard lib"
                 },
-                "scilla.gasLimit":{
-                    "type":"number",
-                    "default":1000,
+                "scilla.gasLimit": {
+                    "type": "number",
+                    "default": 1000,
                     "description": "Gas limit for the your scilla contracts"
                 },
                 "scilla.cfaTag": {
