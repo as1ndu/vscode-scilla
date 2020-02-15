@@ -39,18 +39,6 @@
                 {
                     "command": "scilla.CashFlowAnalyser",
                     "when": "editorLangId == scilla"
-                },
-                {
-                    "command": "scilla.ModifyGasLimit",
-                    "when": "editorLangId == scilla"
-                },
-                {
-                    "command": "scilla.modifyScillaBinaryLocation",
-                    "when": "editorLangId == scilla"
-                },
-                {
-                    "command": "scilla.modifySTDLIBLocation",
-                    "when": "editorLangId == scilla"
                 }
             ]
         },
@@ -60,12 +48,17 @@
                 "scilla.pathToBinaries": {
                     "type": "string",
                     "default": "empty",
-                    "description": "Put the absolute path of the locally compiled scilla binaries."
+                    "description": "The absolute path to the locally compiled scilla binaries."
                 },
                 "scilla.pathToStandardLib": {
                     "type": "string",
                     "default": "empty",
-                    "description": "Location of the stanbdard lib"
+                    "description": "The absolute path to the standard lib"
+                },
+                "scilla.gasLimit":{
+                    "type":"number",
+                    "default":1000,
+                    "description": "Gas limit for the your scilla contracts"
                 },
                 "scilla.cfaTag": {
                     "type": "array",
