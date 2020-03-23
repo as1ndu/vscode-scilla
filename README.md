@@ -18,6 +18,11 @@ Scilla, short for `Smart Contract Intermediate-Level Language`, is an intermedia
 - Gas Usage Reports
 - Configuration via Vscode's UI
 
+## Pending Items
+- Local debuging
+- File icon ([waiting to be merged](https://github.com/jesseweed/seti-ui/compare/master...as1ndu:master))
+- Linguist ([waiting to ber merged](https://github.com/github/linguist/pull/4635))
+
 ## Requirements
 
 Latest version of [Visual Studio Code (VSCode)](https://code.visualstudio.com/) i.e VSCode Engine 1.34.0 & above
