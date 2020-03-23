@@ -1,9 +1,9 @@
 {
     "name": "scilla",
-    "displayName": "scilla",
+    "displayName": "Scilla VSCode",
     "description": "Smart Contract Intermediate Level Language",
     "license": "MIT",
-    "version": "1.3.0",
+    "version": "1.4.1",
     "author": {
         "name": "as1ndu",
         "url": "https://github.com/as1ndu/scilla"
@@ -57,7 +57,7 @@
                 },
                 "scilla.gasLimit": {
                     "type": "number",
-                    "default": 1000,
+                    "default": 8000,
                     "description": "Gas limit for the your scilla contracts"
                 },
                 "scilla.cfaTag": {
@@ -69,6 +69,11 @@
                     "type": "boolean",
                     "default": true,
                     "description": "Use a remote instance to debuge scilla files. No need to compile scilla files"
+                },
+                "scilla.gasReport": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Report how much gas is remaining for the contract."
                 }
             }
         },
@@ -76,18 +81,6 @@
             {
                 "command": "scilla.CashFlowAnalyser",
                 "title": "Scilla: Cash Flow Analyser"
-            },
-            {
-                "command": "scilla.ModifyGasLimit",
-                "title": "Scilla: Set Gas Limit for Scilla"
-            },
-            {
-                "command": "scilla.modifyScillaBinaryLocation",
-                "title": "Scilla: Set location for Scilla binaries"
-            },
-            {
-                "command": "scilla.modifySTDLIBLocation",
-                "title": "Scilla: Set location for Scilla's standard library"
             }
         ],
         "languages": [
@@ -111,13 +104,6 @@
                 "path": "./syntaxes/scilla.tmLanguage.json"
             }
         ],
-        "iconThemes": [
-            {
-                "id": "scilla",
-                "label": "scilla",
-                "path": "./themes/scilla-icon-theme.json"
-            }
-        ],
         "snippets": [
             {
                 "language": "scilla",
@@ -138,7 +124,10 @@
         "vscode": "^1.1.27"
     },
     "dependencies": {
+        "axios": "^0.19.2",
         "check-os": "^1.0.1",
+        "js-base64": "^2.5.2",
+        "minimist": "^1.2.5",
         "node-cmd": "^3.0.0"
     }
 }

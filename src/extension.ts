@@ -5,10 +5,11 @@
 'use strict';
 
 import * as vscode from 'vscode';
-import * as os from 'check-os';
-import * as cmd from 'node-cmd';
-import * as path from 'path';
-import * as fmt from './fmt';
+//import * as os from 'check-os';
+//import * as cmd from 'node-cmd';
+//import * as path from 'path';
+//import * as fmt from './fmt';
+import * as remoteDebugging from './remoteDebugging'
 
 export function activate(context: vscode.ExtensionContext) {
 
@@ -37,6 +38,7 @@ export function activate(context: vscode.ExtensionContext) {
 				end: '**end:** closes a definition',
 				with: '**with:** used with `match` i.e `match x with` ',
 				builtin: '**builtin:** Perform built-in operations e.g `builtin add i1 i2`: Add integer values `i1` and `i2`. Returns an integer of the same type',
+				procedure: '**procedure:** These are like transitions, but can only be called locally i.e can not be called by other contracts',
 
 				//storage
 				String: '`String`: literals in Scilla are expressed using a sequence of characters enclosed in double quotes. Variables can be declared by specifying using keyword `String`',
@@ -123,6 +125,7 @@ export function activate(context: vscode.ExtensionContext) {
 			const sendCompletion = new vscode.CompletionItem('send');
 			const funCompletion = new vscode.CompletionItem('fun');
 			const transitionCompletion = new vscode.CompletionItem('transition');
+			const procedureCompletion = new vscode.CompletionItem('procedure');
 			const matchCompletion = new vscode.CompletionItem('match');
 			const endCompletion = new vscode.CompletionItem('end');
 			const withCompletion = new vscode.CompletionItem('with');
@@ -272,142 +275,21 @@ export function activate(context: vscode.ExtensionContext) {
 	// CashFlow Analyser
 	let CashFlowAnalyser = vscode.commands.registerCommand('scilla.CashFlowAnalyser', () => {
 
-		// Create and show panel
-		const panel = vscode.window.createWebviewPanel(
-			'scilla',
-			'Cash Flow Analyser',
-			vscode.ViewColumn.One,
-			{}
-		);
+		// 
+		remoteDebugging.remoteCFA(vscode.window.activeTextEditor.document)
 
-		if (!os.isWindows) {
-
-			var absolutepath = path.dirname(vscode.window.activeTextEditor.document.uri.fsPath).replace(":", "").replace(/\\/g, "/") + "/";
-
-			console.log('Waiting for data from scilla-checker')
-			let scillaConfig = vscode.workspace.getConfiguration('launch', vscode.window.activeTextEditor.document.uri);
-
-			let binariesPath = scillaConfig.get('scillaBinLocation');
-			let STDLIB = scillaConfig.get('scillaStandardLibrary');
-			let gasLimit = scillaConfig.get('scillaGasLimit');
-
-			cmd.get(`${binariesPath + '/scilla-checker' } -cf  -libdir ${STDLIB} -gaslimit ${gasLimit}  ${absolutepath + path.basename(vscode.window.activeTextEditor.document.uri.fsPath)} -jsonerrors`,
-
-				function (err, data, stderr) {
-					if (data) {
-						console.log('Parsing data from scilla-checker');
-						var content = JSON.parse(data);
-						var CFstateVariables = content.cashflow_tags["State variables"];
-						var CFadtConstructors = content.cashflow_tags["ADT constructors"];
-
-						//console.log(CFstateVariables);
-						var analysisTableRows = '';
-				 
-						console.log('creating table rows for from cashflow analysis');
-						for (let index = 0; index < CFstateVariables.length; index++) {
-
-							let cfVariable = CFstateVariables[index]['field'];
-							let cfTag = CFstateVariables[index]['tag'];
-
-							//var fullCFstatement = "";
-							//var shortCFstatement = "";
-							/*
-							var t = '';
-							var t1 = '';
-							var t2 = '';
-							switch (cfTag) {
-								// For Variables with 'NotInfo' tag
-								case 'NoInfo':
-									var fullCFstatement = "No information has been gathered about the variable. This sometimes (but not always) indicates that the variable is not being used, indicating a potential bug.";
-									var shortCFstatement = "❔ \ No information has been gathered about the variable.";
-									break;
-
-								// For Variables with 'NotMoney' tag
-								case 'NotMoney':
-									var fullCFstatement = "The variable represents something other than money.";
-									var shortCFstatement = "💿 \ Variable does not hold money.";
-									break;
-
-								// For Variables with 'Money' tag
-								case 'Money':
-									var fullCFstatement = "The variable represents money.";
-									var shortCFstatement = "💰 \ The variable represents Money.";
-									break;
-
-								// For Variables with 'Map t' tag
-								case 'Map':
-									var fullCFstatement = "The variable represents a map or a function whose co-domain is tagged with t. Hence, when performing a lookup in the map, or when applying a function on the values stored in the map, the result is tagged with t. Keys of maps are assumed to always be Not money. Using a variable as a function parameter does not give rise to a tag.";
-									var shortCFstatement = `🎲 \ When applying a function/lookup on the values stored in the map,
-            the result is tagged with as ${t}.`;
-									break;
-
-								// For Variables with 'Option t' tag
-								case 'Option':
-									var fullCFstatement = "The variable represents an option value, which, if it does not have the value None, contains the value Some x where x has tag t.";
-									var shortCFstatement = `💭 \ The variable represents an option value with tag ${t}.`;
-									break;
-
-								// For Variables with 'Pair t1 t2 ' tag
-								case 'Pair':
-									var fullCFstatement = "The variable represents a pair of values with tags t1 and t2, respectively.";
-									var shortCFstatement = `🌓 \ The variable represents a pair of values with tags ${t1} and ${t2}, respectively`;
-									break;
-
-								// For Variables with 'Inconsistent' tag
-								case 'Inconsistent':
-									var fullCFstatement = "The variable represents something other than money";
-									var shortCFstatement = `🐞 \ The variable has been used to represent both Money and not Money.`;
-									break;
-
-								default:
-									var fullCFstatement = "undefined";
-									var shortCFstatement = `undefined`;
-							}
-							*/
-
-
-                           
-							var analysisTableRow = `
-								<tr>
-									<td>${cfVariable}</td>
-									<td>${cfTag}</td>
-								</tr>`
-
-							var analysisTableRows = analysisTableRows.concat(analysisTableRow)
-							//console.log(analysisTableRows);
-
-						}
-
-
-						console.log(`Finnished Analysing: ${CFstateVariables.length} State variables  &  ${CFadtConstructors.length} ADT Constructors`);
-						var CFstateVariablesLength = CFstateVariables.length;
-
-						if (CFstateVariables.length == 0) {
-							CFstateVariables = {
-								"field": "none",
-								"tag": "none"
-							}
-
-							CFstateVariablesLength = 0;
-						}
-
-						console.log('Rendering WebView');
-						panel.webview.html = getWebviewContent(CFstateVariablesLength, CFadtConstructors, analysisTableRows);
-
-					}
-				});
-		}
 	});
 
     // Linter feature
 	const collection = vscode.languages.createDiagnosticCollection('scilla');
 	if (vscode.window.activeTextEditor) {
-		updateDiagnostics(vscode.window.activeTextEditor.document, collection);
+		remoteDebugging.remoteDiagnostics(vscode.window.activeTextEditor.document, collection);
 	}
-	var linterFeature = vscode.window.onDidChangeActiveTextEditor(e => updateDiagnostics(e.document, collection));
-	var linterFeature2 = vscode.workspace.onDidChangeTextDocument(e => updateDiagnostics(e.document, collection));
+	var linterFeature = vscode.window.onDidChangeActiveTextEditor(e => remoteDebugging.remoteDiagnostics(e.document, collection));
+	var linterFeature2 = vscode.workspace.onDidChangeTextDocument(e => remoteDebugging.remoteDiagnostics(e.document, collection));
 
 	// Code formatting
+	/*
 	let codeFormatting = vscode.languages.registerDocumentFormattingEditProvider('scilla', {
 		provideDocumentFormattingEdits(document: vscode.TextDocument): vscode.TextEdit[] {
 
@@ -433,60 +315,13 @@ export function activate(context: vscode.ExtensionContext) {
 		  
 		}
 	  });
-
-    // Modidify Gas Limit
-	let modifyGaslimit = vscode.commands.registerCommand('scilla.ModifyGasLimit', () => {
-		let GaslimitConfiguration = vscode.workspace.getConfiguration('launch', vscode.window.activeTextEditor.document.uri);
-
-		async function showInputBox() {
-			const newGasLimit = await vscode.window.showInputBox({
-				value: '',
-				placeHolder: 'Gas limit is expected to be a integer i.e 8000'
-			});
-			
-            GaslimitConfiguration.update('scillaGasLimit', `${newGasLimit}` );
-		    vscode.window.showInformationMessage(`Gas limit set to ${newGasLimit}`);
-		}
-		showInputBox() 
-	});
-
-	// Modify Scilla bin directory
-	let modifyScillaBinLocation = vscode.commands.registerCommand('scilla.modifyScillaBinaryLocation', () => {
-		let ScillaBinLocationConfiguration = vscode.workspace.getConfiguration('launch', vscode.window.activeTextEditor.document.uri);
-	
-		async function showInputBox() {
-			const newScillaBinLocation = await vscode.window.showInputBox({
-				value: '',
-				placeHolder: 'Enter an absolute directory to the Scilla binaries e.g */mnt/c/path/to/scilla-0.4.0/bin*'
-			});
-			
-            ScillaBinLocationConfiguration.update('scillaBinLocation', `${newScillaBinLocation}` );
-		    vscode.window.showInformationMessage(`Scilla bin directory set to ${newScillaBinLocation}`);
-		}
-		showInputBox() 
-	});
-
-	// Modify Standard library location directory
-	let modifySTDLIBLocation = vscode.commands.registerCommand('scilla.modifySTDLIBLocation', () => {
-		let STDLIBLocationConfiguration = vscode.workspace.getConfiguration('launch', vscode.window.activeTextEditor.document.uri);
-	
-		async function showInputBox() {
-			const newSTDLIBLocation = await vscode.window.showInputBox({
-				value: '',
-				placeHolder: 'Enter an absolute directory to the Scilla binaries e.g */mnt/c/path/to/scilla-0.4.0/src/stdlib*'
-			});
-			
-            STDLIBLocationConfiguration.update('scillaStandardLibrary', `${newSTDLIBLocation}` );
-		    vscode.window.showInformationMessage(`Scilla bin directory set to  ${newSTDLIBLocation}`);
-		}
-		showInputBox() 
-	});
- 
+	 */ 
 
     // Push all features into VScode's context
-	context.subscriptions.push(hoverFeature, autocompleteFeature, linterFeature, linterFeature2, CashFlowAnalyser, codeFormatting,  modifyGaslimit, modifyScillaBinLocation, modifySTDLIBLocation );
+	context.subscriptions.push(hoverFeature, autocompleteFeature, linterFeature, linterFeature2, CashFlowAnalyser);
 }
 
+/*
 function updateDiagnostics(document: vscode.TextDocument, collection: vscode.DiagnosticCollection): void {
 
 
@@ -607,7 +442,7 @@ function updateDiagnostics(document: vscode.TextDocument, collection: vscode.Dia
 		vscode.window.showInformationMessage('Install WSL to enable  linting & cashflow analysis');
 	}
 }
-
+*/
 function getWebviewContent(CFstateVariablesLength, adtconstructors, tableRows) {
 	return `
 	<!DOCTYPE html>
