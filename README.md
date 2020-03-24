@@ -14,12 +14,14 @@ Scilla, short for `Smart Contract Intermediate-Level Language`, is an intermedia
 - Syntax highlighting
 - Code Snippets
 - Debugging (Error & Warnings)
-- Cash Flow Analysis
-- Gas Usage Reports
+- Cash Flow Analysis (`ctrl + P` then `>` type `scilla` then select `Scilla: Cashflow Analyser`)
+- Gas Usage Reports (Enable it in extension settings)
+- Type info for variables (Hover over dotted lines to see they type information of a variable)
 - Configuration via Vscode's UI
 
 ## Pending Items
 - Local debuging
+- Code Snippets for various ZRCs
 - File icon ([waiting to be merged](https://github.com/jesseweed/seti-ui/compare/master...as1ndu:master))
 - Linguist ([waiting to ber merged](https://github.com/github/linguist/pull/4635))
 
