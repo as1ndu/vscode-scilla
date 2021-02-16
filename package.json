@@ -3,13 +3,13 @@
     "displayName": "Scilla VSCode",
     "description": "Smart Contract Intermediate Level Language",
     "license": "MIT",
-    "version": "1.4.1",
+    "version": "1.4.2",
     "author": {
         "name": "as1ndu",
-        "url": "https://github.com/as1ndu/scilla"
+        "url": "https://github.com/as1ndu/vscode-scilla"
     },
     "repository": {
-        "url": "https://github.com/as1ndu/scilla"
+        "url": "https://github.com/as1ndu/vscode-scilla"
     },
     "icon": "themes/logo-128x128.png",
     "galleryBanner": {
