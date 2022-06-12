@@ -124,7 +124,7 @@
         "vscode": "^1.1.27"
     },
     "dependencies": {
-        "axios": "^0.21.1",
+        "axios": "^0.21.2",
         "check-os": "^1.0.1",
         "js-base64": "^2.5.2",
         "minimist": "^1.2.5",
